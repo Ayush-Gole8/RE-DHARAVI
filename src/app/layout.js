@@ -1,11 +1,11 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'RE: Dharavi',
+  title: 'Naya Dharavi',
   description:
     'A scroll-driven editorial website documenting Dharavi, Mumbai\'s informal economy and community resistance to large-scale redevelopment.',
   openGraph: {
-    title: 'RE: Dharavi',
+    title: 'Naya Dharavi',
     description:
       'A scroll-driven editorial website documenting Dharavi, Mumbai\'s informal economy and community resistance to large-scale redevelopment.',
     type: 'website',
