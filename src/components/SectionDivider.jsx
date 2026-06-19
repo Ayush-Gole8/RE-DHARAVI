@@ -14,11 +14,11 @@ export default function SectionDivider({ partNumber, title, description, imageSr
       className="relative w-full overflow-hidden"
       style={{ height: '80vh', minHeight: '500px' }}
     >
-      {/* Crimson background - clip-path flood from left */}
+      {/* Brand gradient background - clip-path flood from left */}
       <motion.div
         className="absolute inset-0"
         style={{
-          backgroundColor: 'var(--red-primary)',
+          background: 'var(--gradient-brand)',
           clipPath: isInView ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)',
           transition: 'clip-path 0.8s ease-out',
         }}
@@ -39,7 +39,7 @@ export default function SectionDivider({ partNumber, title, description, imageSr
             sizes="40vw"
           />
           {/* Overlay for text readability */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--red-primary) 0%, transparent 60%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--brand-rose) 0%, transparent 60%)' }} />
         </div>
       )}
 

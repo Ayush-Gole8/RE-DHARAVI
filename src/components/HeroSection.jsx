@@ -11,13 +11,13 @@ export default function HeroSection() {
       style={{
         height: '100vh',
         minHeight: '600px',
-        backgroundColor: 'var(--red-primary)',
+        background: 'var(--gradient-brand)',
       }}
     >
       {/* Layer 1: Crimson background - fades in */}
       <motion.div
         className="absolute inset-0"
-        style={{ backgroundColor: 'var(--red-primary)' }}
+        style={{ background: 'var(--gradient-brand)' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
