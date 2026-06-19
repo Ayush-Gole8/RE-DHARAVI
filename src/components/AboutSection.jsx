@@ -50,7 +50,7 @@ export default function AboutSection() {
                   maxWidth: '560px',
                 }}
               >
-                RE: Dharavi was published in 2010 by SPARC (Society for the Promotion of
+                Naya Dharavi was published in 2010 by SPARC (Society for the Promotion of
                 Area Resource Centres) and KRVIA (Kamla Raheja Vidyanidhi Institute for
                 Architecture and Environmental Studies). It documents the lived reality of
                 Dharavi&apos;s residents in response to large-scale redevelopment proposals.
@@ -109,7 +109,7 @@ export default function AboutSection() {
             letterSpacing: '0.15em',
           }}
         >
-          RE: DHARAVI © SPARC × KRVIA 2010 - Web Translation 2026
+          NAYA DHARAVI © SPARC × KRVIA 2010 - Web Translation 2026
         </p>
       </footer>
     </>

@@ -59,13 +59,13 @@ export default function Navbar() {
           href="#cover"
           onClick={(e) => handleNavClick(e, '#cover')}
           className="flex items-baseline gap-1 no-underline"
-          aria-label="RE: Dharavi - Back to top"
+          aria-label="Naya Dharavi - Back to top"
         >
           <span
             className="font-heading font-bold text-sm tracking-extra-wide uppercase"
             style={{ color: 'var(--orange-accent)', letterSpacing: '0.2em' }}
           >
-            RE:
+            NAYA
           </span>
           <span
             className="font-heading font-bold text-sm tracking-section uppercase text-white"

@@ -45,7 +45,7 @@ export default function HeroSection() {
         className="relative z-10 flex flex-col items-start w-full"
         style={{ paddingLeft: 'clamp(24px, 5vw, 80px)', paddingRight: 'clamp(24px, 5vw, 80px)', maxWidth: '1440px' }}
       >
-        {/* "RE:" label */}
+        {/* "NAYA" label */}
         <motion.span
           className="font-heading font-bold uppercase block"
           style={{
@@ -57,7 +57,7 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          RE:
+          NAYA
         </motion.span>
 
         {/* "DHARAVI" - clip-path reveal */}
