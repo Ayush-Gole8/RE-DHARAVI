@@ -98,7 +98,7 @@ export default function AboutSection() {
       <footer
         className="w-full flex items-center justify-center"
         style={{
-          backgroundColor: 'var(--red-primary)',
+          background: 'var(--gradient-brand)',
           height: '40px',
         }}
       >
