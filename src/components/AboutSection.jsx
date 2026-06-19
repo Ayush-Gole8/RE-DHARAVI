@@ -6,8 +6,7 @@ import { motion, useInView } from 'framer-motion';
 const CREDITS = [
   { label: 'Authors', value: 'Kalpana Sharma, Hussain Indorewala, Rupali Gupte, Prasad Shetty' },
   { label: 'Publisher', value: 'SPARC, Mumbai' },
-  { label: 'Year', value: '2010' },
-  { label: 'Website by', value: 'Rudra Dalvi - Web Development Internship 2026' }
+  { label: 'Year', value: '2010' }
 ];
 
 export default function AboutSection() {
