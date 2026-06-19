@@ -5,41 +5,64 @@
    ============================================================ */
 
 :root {
-  /* ── Colours ───────────────────────────────────────────── */
-  --red-primary: #B31B1B;
-  --red-dark: #8C0000;
-  --orange-accent: #D4620A;
-  --off-white: #F5F0E8;
-  --cream: #EDE8DC;
-  --charcoal: #1A1A1A;
-  --dark-navy: #0D1B2A;
-  --newspaper-gray: #8A8A8A;
-  --gold: #C9A84C;
+  /* ── Core Brand Palette (from client reference image) ───── */
+  /* Deep crimson-rose — left anchor of the gradient */
+  --brand-rose:       #8C0044;
+  /* Rich dark magenta-purple — centre blended tone */
+  --brand-magenta:    #5A0058;
+  /* Deep indigo — right anchor of the gradient */
+  --brand-indigo:     #1C0855;
+
+  /* ── Legacy mapped aliases (used throughout components) ─── */
+  /* Primary "hero" background → deep rose */
+  --red-primary:      #8C0044;
+  /* Darker pressed / hover state */
+  --red-dark:         #66002E;
+  /* Accent colour → soft orchid-pink, distinct from the bg */
+  --orange-accent:    #D96EAF;
+  /* Off-white content areas */
+  --off-white:        #F5F0F4;
+  /* Cream — slightly warmer pink-tinted cream */
+  --cream:            #EDE0E8;
+  /* Dark panels → indigo (replaces plain charcoal) */
+  --charcoal:         #1C0855;
+  /* Deepest navy panels → deeper indigo-purple */
+  --dark-navy:        #120438;
+  /* Muted body text on light backgrounds */
+  --newspaper-gray:   #8A7A8A;
+  /* Gold accent (tables, decorative) → muted mauve-gold */
+  --gold:             #C9A8C4;
+
+  /* ── Gradient helpers ────────────────────────────────────── */
+  /* Full left-to-right brand sweep, matching reference image */
+  --gradient-brand:   linear-gradient(135deg, #8C0044 0%, #5A0058 50%, #1C0855 100%);
+  /* Subtle tint for section backgrounds */
+  --gradient-subtle:  linear-gradient(135deg, rgba(140,0,68,0.08) 0%, rgba(90,0,88,0.06) 50%, rgba(28,8,85,0.08) 100%);
 
   /* ── Font Families ─────────────────────────────────────── */
-  --font-display: 'Bebas Neue', cursive;
-  --font-heading: 'Barlow Condensed', sans-serif;
-  --font-body: 'Libre Baskerville', serif;
-  --font-quote: 'Playfair Display', serif;
-  --font-newspaper: 'Special Elite', cursive;
-  --font-ui: 'Barlow', sans-serif;
+  --font-display:     'Bebas Neue', cursive;
+  --font-heading:     'Barlow Condensed', sans-serif;
+  --font-body:        'Libre Baskerville', serif;
+  --font-quote:       'Playfair Display', serif;
+  --font-newspaper:   'Special Elite', cursive;
+  --font-ui:          'Barlow', sans-serif;
 
   /* ── Typographic Scale ─────────────────────────────────── */
-  --fs-hero: clamp(80px, 12vw, 160px);
-  --fs-section-header: clamp(36px, 5vw, 72px);
-  --fs-sub-header: clamp(22px, 3vw, 36px);
-  --fs-pull-quote: clamp(20px, 2.5vw, 32px);
-  --fs-body: clamp(15px, 1.2vw, 18px);
-  --fs-caption: 12px;
-  --fs-callout: clamp(120px, 20vw, 300px);
+  --fs-hero:            clamp(80px, 12vw, 160px);
+  --fs-section-header:  clamp(36px, 5vw, 72px);
+  --fs-sub-header:      clamp(22px, 3vw, 36px);
+  --fs-pull-quote:      clamp(20px, 2.5vw, 32px);
+  --fs-body:            clamp(15px, 1.2vw, 18px);
+  --fs-caption:         12px;
+  --fs-callout:         clamp(120px, 20vw, 300px);
 
   /* ── Layout ────────────────────────────────────────────── */
-  --max-width: 1440px;
-  --gutter-desktop: 80px;
-  --gutter-mobile: 24px;
-  --grid-columns: 12;
+  --max-width:          1440px;
+  --gutter-desktop:     80px;
+  --gutter-mobile:      24px;
+  --grid-columns:       12;
 
   /* ── Borders & Misc ────────────────────────────────────── */
-  --border-table: #D4C9B0;
-  --paper-border: #C4B99A;
+  --border-table:       #C8B0C4;
+  --paper-border:       #BDA8BA;
 }
