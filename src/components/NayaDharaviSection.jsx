@@ -108,10 +108,7 @@ export default function NayaDharaviSection() {
                   lineHeight: 1.75,
                 }}
               >
-                A community-driven platform built by the people of Dharavi, for the people of
-                Dharavi. We are dedicated to keeping every resident informed, empowered, and
-                heard — sharing the latest community news, housing information, local updates,
-                and civic developments directly with you.
+                Naya Dharavi is the trusted platform for the residents of Dharavi, offering project information, updates, guidance and support - ensuring every Dharvikar stays informed, connected and empowered throughout the redevelopment journey.
               </p>
               {/* Red rule */}
               <motion.hr
