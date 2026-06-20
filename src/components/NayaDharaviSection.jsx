@@ -108,7 +108,7 @@ export default function NayaDharaviSection() {
                   lineHeight: 1.75,
                 }}
               >
-                Naya Dharavi is the trusted platform for the residents of Dharavi, offering project information, updates, guidance and support - ensuring every Dharvikar stays informed, connected and empowered throughout the redevelopment journey.
+                Naya Dharavi is the trusted platform for the residents of Dharavi, offering project information, updates, guidance and support - ensuring every Dharavikar stays informed, connected and empowered throughout the redevelopment journey.
               </p>
               {/* Red rule */}
               <motion.hr
