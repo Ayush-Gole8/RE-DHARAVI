@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 const NAV_LINKS = [
   { label: 'Home', href: '#cover' },
@@ -10,70 +11,6 @@ const NAV_LINKS = [
   { label: 'Naya Dharavi', href: '#naya-dharavi' },
   { label: 'About', href: '#about' },
 ];
-
-/**
- * SVG logo — exactly replicates the uploaded brand mark with full transparency.
- * darkMode=true  → DHARAVI in white  (for dark/gradient backgrounds)
- * darkMode=false → DHARAVI in navy   (for light backgrounds)
- */
-function NayaDharaviLogo({ darkMode = true, width = 180 }) {
-  const id = darkMode ? 'ng-dark' : 'ng-light';
-  return (
-    <svg
-      viewBox="0 0 240 52"
-      width={width}
-      height={width * (52 / 240)}
-      aria-label="Naya Dharavi"
-      role="img"
-      style={{ display: 'block', overflow: 'visible' }}
-    >
-      <defs>
-        {/* Brand gradient: crimson-rose → deep magenta, matching reference image */}
-        <linearGradient id={id} x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stopColor="#D42B55" />
-          <stop offset="100%" stopColor="#5A0058" />
-        </linearGradient>
-      </defs>
-
-      {/* NAYA — bold, gradient filled */}
-      <text
-        x="0"
-        y="26"
-        fontFamily="'Barlow Condensed', 'Barlow', sans-serif"
-        fontSize="42"
-        fontWeight="700"
-        fill={`url(#${id})`}
-        letterSpacing="1"
-        dominantBaseline="middle"
-      >
-        NAYA
-      </text>
-
-      {/* Vertical separator */}
-      <line
-        x1="118" y1="4"
-        x2="118" y2="48"
-        stroke={darkMode ? 'rgba(255,255,255,0.35)' : 'rgba(45,42,94,0.35)'}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-
-      {/* DHARAVI — regular weight, switches colour by mode */}
-      <text
-        x="130"
-        y="26"
-        fontFamily="'Barlow Condensed', 'Barlow', sans-serif"
-        fontSize="30"
-        fontWeight="400"
-        fill={darkMode ? '#FFFFFF' : '#2D2A5E'}
-        letterSpacing="3.5"
-        dominantBaseline="middle"
-      >
-        DHARAVI
-      </text>
-    </svg>
-  );
-}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -120,7 +57,14 @@ export default function Navbar() {
           id="site-logo-link"
           style={{ lineHeight: 0 }}
         >
-          <NayaDharaviLogo darkMode={true} width={160} />
+          <Image
+            src="/images/brand-logo.PNG"
+            alt="Naya Dharavi Logo"
+            width={160}
+            height={35}
+            className="object-contain"
+            priority
+          />
         </a>
 
         {/* Desktop Links */}
@@ -174,7 +118,13 @@ export default function Navbar() {
               transition={{ delay: 0.1, duration: 0.4 }}
               style={{ marginBottom: '48px' }}
             >
-              <NayaDharaviLogo darkMode={true} width={200} />
+              <Image
+                src="/images/brand-logo.PNG"
+                alt="Naya Dharavi Logo"
+                width={200}
+                height={43}
+                className="object-contain"
+              />
             </motion.div>
 
             <ul className="list-none m-0 p-0 flex flex-col items-center gap-8">
