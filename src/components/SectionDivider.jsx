@@ -1,43 +1,54 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 
-export default function SectionDivider({ partNumber, title, description, imageSrc, imageAlt }) {
+export default function SectionDivider({ partNumber, title, description, imageSrc, imageAlt, fullHeight = false }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  // Scroll parallax for the right-side documentary photograph
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  // Moves the image relative to scroll direction for depth
+  const imageY = useTransform(scrollYProgress, [0, 1], [-60, 60]);
 
   return (
     <section
       ref={ref}
       className="relative w-full overflow-hidden"
-      style={{ height: '80vh', minHeight: '500px' }}
+      style={{ height: fullHeight ? '100%' : '80vh', minHeight: '500px' }}
     >
-      {/* Brand gradient background - clip-path flood from left */}
-      <motion.div
+      {/* Brand gradient background */}
+      <div
         className="absolute inset-0"
         style={{
           background: 'var(--gradient-brand)',
-          clipPath: isInView ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)',
-          transition: 'clip-path 0.8s ease-out',
         }}
       />
 
-      {/* Right-side documentary photograph */}
+      {/* Right-side documentary photograph with scroll parallax */}
       {imageSrc && (
         <div
-          className="absolute top-0 right-0 h-full hidden md:block"
-          style={{ width: '40%' }}
+          className="absolute right-0 overflow-hidden hidden md:block"
+          style={{ width: '40%', height: '120%', top: '-10%' }}
         >
-          <Image
-            src={imageSrc}
-            alt={imageAlt || 'Documentary photograph'}
-            fill
-            className="object-cover"
-            style={{ filter: 'grayscale(100%) contrast(1.1)' }}
-            sizes="40vw"
-          />
+          <motion.div 
+            style={{ y: imageY, height: '100%', width: '100%', position: 'relative' }}
+          >
+            <Image
+              src={imageSrc}
+              alt={imageAlt || 'Documentary photograph'}
+              fill
+              className="object-cover"
+              style={{ filter: 'grayscale(100%) contrast(1.1)' }}
+              sizes="40vw"
+            />
+          </motion.div>
           {/* Overlay for text readability */}
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--brand-rose) 0%, transparent 60%)' }} />
         </div>

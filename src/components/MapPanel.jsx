@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 const ZONES = [
   {
@@ -60,7 +60,7 @@ const ZONES = [
   },
 ];
 
-export default function MapPanel() {
+export default function MapPanel({ compact = false }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [activeZone, setActiveZone] = useState(null);
@@ -77,7 +77,7 @@ export default function MapPanel() {
   return (
     <section
       ref={ref}
-      className="w-full py-20 md:py-32"
+      className={`w-full ${compact ? 'py-4 md:py-8' : 'py-20 md:py-32'}`}
       style={{ backgroundColor: 'var(--charcoal)' }}
     >
       <div
@@ -89,11 +89,11 @@ export default function MapPanel() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className={compact ? 'mb-4' : 'mb-12'}
         >
           <h2
             className="font-display text-white m-0 leading-none"
-            style={{ fontSize: 'clamp(36px, 5vw, 56px)' }}
+            style={{ fontSize: compact ? '32px' : 'clamp(36px, 5vw, 56px)' }}
           >
             Sector IV - A Neighbourhood Mapped
           </h2>
@@ -112,7 +112,7 @@ export default function MapPanel() {
         <motion.div
           className="relative mx-auto overflow-x-auto"
           style={{
-            maxWidth: '900px',
+            maxWidth: compact ? '760px' : '900px',
             WebkitOverflowScrolling: 'touch',
           }}
           initial={{ opacity: 0 }}
@@ -164,14 +164,18 @@ export default function MapPanel() {
             {/* Zones */}
             {ZONES.map((zone) => (
               <g key={zone.id}>
-                {/* Zone polygon */}
-                <polygon
+                {/* Zone polygon with scale and stroke glow hover effect */}
+                <motion.polygon
                   points={zone.points}
                   fill={zone.fill}
-                  opacity={activeZone === zone.id ? 1.0 : 0.75}
-                  stroke="rgba(255,255,255,0.2)"
-                  strokeWidth="1"
-                  className="transition-opacity duration-200 cursor-pointer"
+                  animate={{
+                    opacity: activeZone === zone.id ? 1.0 : 0.75,
+                    scale: activeZone === zone.id ? 1.02 : 1,
+                    stroke: activeZone === zone.id ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.2)',
+                    strokeWidth: activeZone === zone.id ? 1.5 : 1,
+                  }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="cursor-pointer"
                   onMouseEnter={() => setActiveZone(zone.id)}
                   onMouseLeave={() => setActiveZone(null)}
                   onFocus={() => setActiveZone(zone.id)}
@@ -179,7 +183,7 @@ export default function MapPanel() {
                   tabIndex={0}
                   role="button"
                   aria-label={`${zone.name} zone - ${zone.tooltip}`}
-                  style={{ outline: 'none' }}
+                  style={{ outline: 'none', transformOrigin: `${zone.labelX}px ${zone.labelY}px` }}
                 />
 
                 {/* Hatching pattern overlay for accessibility */}
@@ -190,8 +194,8 @@ export default function MapPanel() {
                   pointerEvents="none"
                 />
 
-                {/* Zone label */}
-                <text
+                {/* Zone label with dynamic scale */}
+                <motion.text
                   x={zone.labelX}
                   y={zone.labelY}
                   textAnchor="middle"
@@ -200,10 +204,15 @@ export default function MapPanel() {
                   fontFamily="Barlow, sans-serif"
                   fontWeight="600"
                   pointerEvents="none"
-                  opacity={0.9}
+                  animate={{
+                    scale: activeZone === zone.id ? 1.1 : 1,
+                    opacity: activeZone === zone.id ? 1.0 : 0.9,
+                  }}
+                  transition={{ duration: 0.2 }}
+                  style={{ transformOrigin: `${zone.labelX}px ${zone.labelY}px` }}
                 >
                   {zone.name}
-                </text>
+                </motion.text>
               </g>
             ))}
 
@@ -244,32 +253,41 @@ export default function MapPanel() {
             </text>
           </svg>
 
-          {/* Tooltip */}
-          {activeZone && (
-            <div
-              className="absolute pointer-events-none z-20"
-              style={{
-                left: `${mousePos.x}px`,
-                top: `${mousePos.y - 50}px`,
-                backgroundColor: 'var(--charcoal)',
-                color: 'white',
-                fontFamily: 'var(--font-ui)',
-                fontSize: '13px',
-                padding: '8px 12px',
-                borderRadius: '4px',
-                whiteSpace: 'nowrap',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-                transform: 'translateX(-50%)',
-              }}
-            >
-              {ZONES.find((z) => z.id === activeZone)?.tooltip}
-            </div>
-          )}
+          {/* Glassmorphic animated Tooltip */}
+          <AnimatePresence>
+            {activeZone && (
+              <motion.div
+                className="absolute pointer-events-none z-20"
+                initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 15, scale: 0.95 }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
+                style={{
+                  left: `${mousePos.x}px`,
+                  top: `${mousePos.y - 55}px`,
+                  backgroundColor: 'rgba(13, 27, 42, 0.92)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  color: 'white',
+                  fontFamily: 'var(--font-ui)',
+                  fontSize: '13px',
+                  padding: '8px 14px',
+                  borderRadius: '6px',
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+                  transform: 'translateX(-50%)',
+                  transformOrigin: 'bottom center',
+                }}
+              >
+                {ZONES.find((z) => z.id === activeZone)?.tooltip}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         {/* Legend */}
         <motion.div
-          className="flex flex-wrap gap-6 mt-8 justify-center"
+          className={`flex flex-wrap gap-6 justify-center ${compact ? 'mt-4' : 'mt-8'}`}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.6 }}

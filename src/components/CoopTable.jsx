@@ -11,21 +11,21 @@ const TABLE_DATA = [
   { type: 'Recycling Units', count: '800+', activity: 'Waste processing' },
 ];
 
-export default function CoopTable() {
+export default function CoopTable({ compact = false }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <section
       ref={ref}
-      className="w-full py-20 md:py-32"
+      className={`w-full ${compact ? 'py-4 md:py-8' : 'py-20 md:py-32'}`}
       style={{ backgroundColor: 'var(--off-white)' }}
     >
       <div
         className="max-w-editorial mx-auto"
         style={{ paddingLeft: 'clamp(24px, 5vw, 80px)', paddingRight: 'clamp(24px, 5vw, 80px)' }}
       >
-        <div className="flex flex-col md:flex-row gap-12 md:gap-16">
+        <div className={`flex flex-col md:flex-row ${compact ? 'gap-6 md:gap-8' : 'gap-12 md:gap-16'}`}>
           {/* Text column */}
           <motion.div
             className="w-full md:w-[45%] flex flex-col justify-center"
@@ -33,11 +33,11 @@ export default function CoopTable() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className="label-tag block mb-4">COMMUNITY STRUCTURES</span>
+            <span className={`label-tag block ${compact ? 'mb-2' : 'mb-4'}`}>COMMUNITY STRUCTURES</span>
             <h2
               className="font-heading font-bold uppercase m-0 leading-tight"
               style={{
-                fontSize: 'clamp(32px, 4vw, 42px)',
+                fontSize: compact ? '28px' : 'clamp(32px, 4vw, 42px)',
                 letterSpacing: '0.08em',
                 color: 'var(--charcoal)',
               }}
@@ -45,9 +45,9 @@ export default function CoopTable() {
               The Self-Organised City
             </h2>
             <p
-              className="font-body mt-6"
+              className={`font-body ${compact ? 'mt-2' : 'mt-6'}`}
               style={{
-                fontSize: '17px',
+                fontSize: compact ? '15px' : '17px',
                 lineHeight: 1.7,
                 color: 'var(--charcoal)',
               }}
@@ -108,11 +108,20 @@ export default function CoopTable() {
                 </thead>
                 <tbody>
                   {TABLE_DATA.map((row, i) => (
-                    <tr
+                    <motion.tr
                       key={i}
                       style={{
                         backgroundColor: i % 2 === 0 ? 'var(--cream)' : '#FFFFFF',
                         borderBottom: '1px solid var(--border-table)',
+                        cursor: 'default',
+                      }}
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.25 + i * 0.1, ease: 'easeOut' }}
+                      whileHover={{ 
+                        backgroundColor: 'rgba(140, 0, 68, 0.05)',
+                        scale: 1.015,
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
                       }}
                     >
                       <td
@@ -146,7 +155,7 @@ export default function CoopTable() {
                       >
                         {row.activity}
                       </td>
-                    </tr>
+                    </motion.tr>
                   ))}
                 </tbody>
               </table>

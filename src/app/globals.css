@@ -28,7 +28,7 @@
     line-height: 1.7;
     color: var(--charcoal);
     background-color: var(--off-white);
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   *,
