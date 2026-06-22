@@ -47,12 +47,16 @@ export default function Navbar() {
   return (
     <nav
       id="main-nav"
-      className="fixed top-0 left-0 w-full z-50 transition-colors duration-300"
-      style={{
-        backgroundColor: scrolled ? 'var(--charcoal)' : 'transparent',
-      }}
+      className="fixed top-0 left-0 w-full z-50"
     >
-      <div className="max-w-editorial mx-auto flex items-center justify-between px-gutter py-4 md:py-5"
+      {/* Background layer to prevent fixed overlay positioning containment issues */}
+      <div
+        className="absolute inset-0 z-0 transition-all duration-300"
+        style={{
+          backgroundColor: scrolled ? 'var(--charcoal)' : 'transparent',
+        }}
+      />
+      <div className="relative z-10 max-w-editorial mx-auto flex items-center justify-between px-gutter py-4 md:py-5"
            style={{ paddingLeft: 'clamp(24px, 5vw, 80px)', paddingRight: 'clamp(24px, 5vw, 80px)' }}>
         {/* Logo */}
         <a

@@ -37,15 +37,19 @@ export default function Navbar() {
   return (
     <nav
       id="main-nav"
-      className="fixed top-0 left-0 w-full z-50 transition-all duration-300"
-      style={{
-        backgroundColor: scrolled ? 'rgba(18, 4, 56, 0.55)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
-      }}
+      className="fixed top-0 left-0 w-full z-50"
     >
+      {/* Background layer to prevent fixed overlay positioning containment issues from backdropFilter */}
       <div
-        className="max-w-editorial mx-auto flex items-center justify-between py-3 md:py-4"
+        className="absolute inset-0 z-0 transition-all duration-300"
+        style={{
+          backgroundColor: scrolled ? 'rgba(18, 4, 56, 0.55)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
+        }}
+      />
+      <div
+        className="relative z-10 max-w-editorial mx-auto flex items-center justify-between py-3 md:py-4"
         style={{ paddingLeft: 'clamp(24px, 5vw, 80px)', paddingRight: 'clamp(24px, 5vw, 80px)' }}
       >
         {/* SVG Logo — always dark mode in navbar (bg is always dark/gradient) */}
