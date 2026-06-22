@@ -4,7 +4,7 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 
-export default function SectionDivider({ partNumber, title, description, imageSrc, imageAlt }) {
+export default function SectionDivider({ partNumber, title, description, imageSrc, imageAlt, fullHeight = false }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
@@ -21,15 +21,13 @@ export default function SectionDivider({ partNumber, title, description, imageSr
     <section
       ref={ref}
       className="relative w-full overflow-hidden"
-      style={{ height: '80vh', minHeight: '500px' }}
+      style={{ height: fullHeight ? '100%' : '80vh', minHeight: '500px' }}
     >
-      {/* Brand gradient background - clip-path flood from left */}
-      <motion.div
+      {/* Brand gradient background */}
+      <div
         className="absolute inset-0"
         style={{
           background: 'var(--gradient-brand)',
-          clipPath: isInView ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)',
-          transition: 'clip-path 0.8s ease-out',
         }}
       />
 

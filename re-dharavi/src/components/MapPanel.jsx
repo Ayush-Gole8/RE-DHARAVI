@@ -60,7 +60,7 @@ const ZONES = [
   },
 ];
 
-export default function MapPanel() {
+export default function MapPanel({ compact = false }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [activeZone, setActiveZone] = useState(null);
@@ -77,7 +77,7 @@ export default function MapPanel() {
   return (
     <section
       ref={ref}
-      className="w-full py-20 md:py-32"
+      className={`w-full ${compact ? 'py-4 md:py-8' : 'py-20 md:py-32'}`}
       style={{ backgroundColor: 'var(--charcoal)' }}
     >
       <div
@@ -89,11 +89,11 @@ export default function MapPanel() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className={compact ? 'mb-4' : 'mb-12'}
         >
           <h2
             className="font-display text-white m-0 leading-none"
-            style={{ fontSize: 'clamp(36px, 5vw, 56px)' }}
+            style={{ fontSize: compact ? '32px' : 'clamp(36px, 5vw, 56px)' }}
           >
             Sector IV - A Neighbourhood Mapped
           </h2>
@@ -112,7 +112,7 @@ export default function MapPanel() {
         <motion.div
           className="relative mx-auto overflow-x-auto"
           style={{
-            maxWidth: '900px',
+            maxWidth: compact ? '760px' : '900px',
             WebkitOverflowScrolling: 'touch',
           }}
           initial={{ opacity: 0 }}
@@ -269,7 +269,7 @@ export default function MapPanel() {
 
         {/* Legend */}
         <motion.div
-          className="flex flex-wrap gap-6 mt-8 justify-center"
+          className={`flex flex-wrap gap-6 justify-center ${compact ? 'mt-4' : 'mt-8'}`}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.6 }}

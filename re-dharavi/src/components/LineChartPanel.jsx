@@ -8,9 +8,9 @@ import { sharedChartOptions } from '@/lib/chartConfig';
 // Chart.js registration is done via import side-effect
 import '@/lib/chartConfig';
 
-export default function LineChartPanel() {
+export default function LineChartPanel({ compact = false }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.6 });
   const [animateCharts, setAnimateCharts] = useState(false);
 
   // Trigger chart animation when in view
@@ -58,6 +58,10 @@ export default function LineChartPanel() {
 
   const residentialOptions = {
     ...sharedChartOptions,
+    animation: {
+      duration: 3000,
+      easing: 'easeInOutQuart',
+    },
     plugins: {
       ...sharedChartOptions.plugins,
       title: {
@@ -76,6 +80,10 @@ export default function LineChartPanel() {
 
   const commercialOptions = {
     ...sharedChartOptions,
+    animation: {
+      duration: 3000,
+      easing: 'easeInOutQuart',
+    },
     plugins: {
       ...sharedChartOptions.plugins,
       title: {
@@ -95,7 +103,7 @@ export default function LineChartPanel() {
   return (
     <section
       ref={ref}
-      className="w-full py-20 md:py-32"
+      className={`w-full ${compact ? 'py-4 md:py-8' : 'py-20 md:py-32'}`}
       style={{ backgroundColor: 'var(--dark-navy)' }}
     >
       <div
@@ -111,12 +119,12 @@ export default function LineChartPanel() {
           <span className="label-tag block mb-4">DATA</span>
           <h2
             className="font-display text-white m-0 leading-none"
-            style={{ fontSize: '64px' }}
+            style={{ fontSize: compact ? '36px' : '64px' }}
           >
             Land of High Returns
           </h2>
           <p
-            className="font-body mt-6"
+            className={`font-body ${compact ? 'mt-2' : 'mt-6'}`}
             style={{
               fontSize: '16px',
               color: 'rgba(255, 255, 255, 0.75)',
@@ -131,7 +139,7 @@ export default function LineChartPanel() {
 
         {/* Charts grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-12"
+          className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 ${compact ? 'mt-4' : 'mt-12'}`}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}

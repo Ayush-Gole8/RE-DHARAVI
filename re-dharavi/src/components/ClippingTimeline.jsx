@@ -37,14 +37,14 @@ const CLIPPINGS = [
   },
 ];
 
-export default function ClippingTimeline() {
+export default function ClippingTimeline({ compact = false }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <section
       ref={ref}
-      className="w-full py-20 md:py-32"
+      className={`w-full ${compact ? 'py-4 md:py-8' : 'py-20 md:py-32'}`}
       style={{ backgroundColor: 'var(--off-white)' }}
     >
       <div
@@ -56,13 +56,13 @@ export default function ClippingTimeline() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className={compact ? 'mb-4' : 'mb-12'}
         >
-          <span className="label-tag block mb-4">ARCHIVE</span>
+          <span className={`label-tag block ${compact ? 'mb-1' : 'mb-4'}`}>ARCHIVE</span>
           <h2
             className="font-heading font-bold uppercase m-0"
             style={{
-              fontSize: '48px',
+              fontSize: compact ? '32px' : '48px',
               letterSpacing: '0.08em',
               color: 'var(--charcoal)',
             }}

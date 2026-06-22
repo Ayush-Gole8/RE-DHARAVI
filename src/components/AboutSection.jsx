@@ -38,7 +38,7 @@ export default function AboutSection() {
                 className="font-display text-white m-0 leading-none"
                 style={{ fontSize: '48px' }}
               >
-                About This Publication
+                About Naya Dharavi
               </h2>
               <p
                 className="font-body mt-8"
@@ -49,10 +49,9 @@ export default function AboutSection() {
                   maxWidth: '560px',
                 }}
               >
-                Naya Dharavi was published in 2010 by SPARC (Society for the Promotion of
-                Area Resource Centres) and KRVIA (Kamla Raheja Vidyanidhi Institute for
-                Architecture and Environmental Studies). It documents the lived reality of
-                Dharavi&apos;s residents in response to large-scale redevelopment proposals.
+                Naya Dharavi is the trusted platform for the residents of Dharavi, offering
+                project information, updates, guidance, and support—ensuring every Dharavikar
+                stays informed, connected, and empowered throughout the redevelopment journey.
               </p>
             </motion.div>
 
