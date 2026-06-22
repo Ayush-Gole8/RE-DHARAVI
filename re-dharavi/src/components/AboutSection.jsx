@@ -77,11 +77,13 @@ export default function AboutSection() {
                   >
                     {credit.label}
                   </span>
+              
                   <p
                     className="font-ui m-0"
                     style={{
                       fontSize: '13px',
                       color: 'rgba(255, 255, 255, 0.6)',
+                      
                       lineHeight: 1.6,
                     }}
                   >

@@ -60,8 +60,13 @@ export default function Navbar() {
           <Image
             src="/images/brand-logo.PNG"
             alt="Naya Dharavi Logo"
-            width={160}
-            height={35}
+            width={197}
+            height={36}
+            style={{
+              width: 'auto',
+              height: 'clamp(28px, 4vw, 36px)',
+              filter: 'drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.45)) drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.2))',
+            }}
             className="object-contain"
             priority
           />
@@ -121,8 +126,13 @@ export default function Navbar() {
               <Image
                 src="/images/brand-logo.PNG"
                 alt="Naya Dharavi Logo"
-                width={200}
-                height={43}
+                width={230}
+                height={42}
+                style={{
+                  width: 'auto',
+                  height: '42px',
+                  filter: 'drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.45)) drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.2))',
+                }}
                 className="object-contain"
               />
             </motion.div>
