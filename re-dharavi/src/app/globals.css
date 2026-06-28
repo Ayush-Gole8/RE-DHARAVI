@@ -1,10 +1,10 @@
 /* ============================================================
-   RE: DHARAVI - Global Styles
+   NAYA DHARAVI - Global Styles
    Google Fonts, resets, scroll behaviour, accessibility.
    ============================================================ */
 
 /* ── Google Fonts ────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital@1&family=Special+Elite&display=swap');
+/* Handled by next/font/google in layout.js */
 
 /* ── Import tokens ──────────────────────────────────────── */
 @import './tokens.css';
@@ -47,7 +47,7 @@
 
   /* ── Focus Ring Override ─────────────────────────────── */
   *:focus-visible {
-    outline: 2px solid var(--red-primary);
+    outline: 2px solid var(--brand-rose);
     outline-offset: 3px;
   }
 
@@ -58,7 +58,7 @@
 
   /* ── Selection Colour ───────────────────────────────── */
   ::selection {
-    background-color: var(--red-primary);
+    background-color: var(--brand-magenta);
     color: white;
   }
 }
@@ -95,8 +95,8 @@
   .ghost-number {
     font-family: var(--font-display);
     font-size: var(--fs-callout);
-    color: var(--red-primary);
-    opacity: 0.09;
+    color: var(--brand-magenta);
+    opacity: 0.07;
     position: absolute;
     z-index: 0;
     pointer-events: none;
@@ -196,6 +196,39 @@
       padding-bottom: 60px !important;
       overflow-y: visible !important;
     }
+  }
+}
+
+/* ── Navbharat Layout Helpers ────────────────────────── */
+.nbt-row-padding {
+  padding-top: 9vw;
+  padding-bottom: 9vw;
+}
+.nbt-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-left: clamp(24px, 5vw, 80px);
+  padding-right: clamp(24px, 5vw, 80px);
+  width: 100%;
+}
+.nbt-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 30px;
+}
+@media (min-width: 768px) {
+  .nbt-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.nbt-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 40px;
+}
+@media (min-width: 768px) {
+  .nbt-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

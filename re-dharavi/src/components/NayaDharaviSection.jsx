@@ -53,13 +53,15 @@ export default function NayaDharaviSection() {
         ref={headerRef}
         className="w-full"
         style={{
-          backgroundColor: 'var(--dark-navy)',
+          backgroundColor: '#ffffff',
           padding: 'clamp(60px, 8vw, 100px) clamp(24px, 5vw, 80px)',
+          borderBottom: '1px solid rgba(0, 0, 0, 0.08)'
         }}
       >
         <div className="max-w-editorial mx-auto">
           <motion.span
             className="label-tag block mb-6"
+            style={{ color: 'var(--nbt-gold)' }}
             initial={{ opacity: 0 }}
             animate={headerInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5 }}
@@ -76,7 +78,7 @@ export default function NayaDharaviSection() {
               transition={{ duration: 0.6, delay: 0.15 }}
             >
               <h2
-                className="font-display text-white leading-none m-0"
+                className="font-display leading-none m-0 text-black"
                 style={{ fontSize: 'clamp(64px, 10vw, 140px)', letterSpacing: '0.03em' }}
               >
                 NAYA
@@ -86,7 +88,7 @@ export default function NayaDharaviSection() {
                 style={{
                   fontSize: 'clamp(64px, 10vw, 140px)',
                   letterSpacing: '0.03em',
-                  color: 'var(--orange-accent)',
+                  color: 'var(--nbt-gold)',
                 }}
               >
                 DHARAVI
@@ -101,24 +103,21 @@ export default function NayaDharaviSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <p
-                className="font-body"
+                className="font-body text-black"
                 style={{
                   fontSize: 'clamp(16px, 1.4vw, 20px)',
-                  color: 'rgba(255, 255, 255, 0.8)',
+                  color: '#444444',
                   lineHeight: 1.75,
                 }}
               >
-                A community-driven platform built by the people of Dharavi, for the people of
-                Dharavi. We are dedicated to keeping every resident informed, empowered, and
-                heard — sharing the latest community news, housing information, local updates,
-                and civic developments directly with you.
+                Naya Dharavi is the trusted platform for the residents of Dharavi, offering project information, updates, guidance and support - ensuring every Dharavikar stays informed, connected and empowered throughout the redevelopment journey.
               </p>
-              {/* Red rule */}
+              {/* Gold rule */}
               <motion.hr
                 className="border-none m-0"
                 style={{
                   height: '2px',
-                  backgroundColor: 'var(--red-primary)',
+                  backgroundColor: 'var(--nbt-gold)',
                   maxWidth: '80px',
                   transformOrigin: 'left',
                 }}
@@ -184,8 +183,8 @@ export default function NayaDharaviSection() {
                   style={{
                     fontSize: '36px',
                     lineHeight: 1,
-                    color: 'var(--red-primary)',
-                    opacity: 0.3,
+                    color: 'var(--brand-magenta)',
+                    opacity: 0.4,
                   }}
                 >
                   {pillar.number}
@@ -266,7 +265,7 @@ export default function NayaDharaviSection() {
             className="border-none mt-12 mb-6"
             style={{
               height: '2px',
-              backgroundColor: 'var(--red-primary)',
+              backgroundColor: 'var(--orange-accent)',
               maxWidth: '400px',
               transformOrigin: 'left',
             }}

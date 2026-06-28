@@ -36,12 +36,12 @@ export const sharedChartOptions = {
     tooltip: {
       backgroundColor: '#1A1A1A',
       titleFont: {
-        family: 'Barlow',
+        family: 'Poppins',
         size: 12,
         weight: 600,
       },
       bodyFont: {
-        family: 'Barlow',
+        family: 'Poppins',
         size: 13,
       },
       padding: { top: 8, bottom: 8, left: 12, right: 12 },
@@ -53,7 +53,7 @@ export const sharedChartOptions = {
     x: {
       ticks: {
         font: {
-          family: 'Barlow',
+          family: 'Poppins',
           size: 11,
         },
         color: 'rgba(255, 255, 255, 0.6)',
@@ -68,7 +68,7 @@ export const sharedChartOptions = {
     y: {
       ticks: {
         font: {
-          family: 'Barlow',
+          family: 'Poppins',
           size: 11,
         },
         color: 'rgba(255, 255, 255, 0.6)',

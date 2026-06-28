@@ -56,7 +56,7 @@ export default function EditorialRow({
         )}
 
         <div
-          className="max-w-editorial mx-auto"
+          className="max-w-editorial mx-auto pt-[80px] md:pt-[100px]"
           style={{
             paddingLeft: 'clamp(24px, 5vw, 80px)',
             paddingRight: 'clamp(24px, 5vw, 80px)',

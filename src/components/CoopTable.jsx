@@ -22,7 +22,7 @@ export default function CoopTable({ compact = false }) {
       style={{ backgroundColor: 'var(--off-white)' }}
     >
       <div
-        className="max-w-editorial mx-auto"
+        className={`max-w-editorial mx-auto ${compact ? 'pt-[80px] md:pt-[100px]' : ''}`}
         style={{ paddingLeft: 'clamp(24px, 5vw, 80px)', paddingRight: 'clamp(24px, 5vw, 80px)' }}
       >
         <div className={`flex flex-col md:flex-row ${compact ? 'gap-6 md:gap-8' : 'gap-12 md:gap-16'}`}>

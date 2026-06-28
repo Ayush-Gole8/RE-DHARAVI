@@ -22,7 +22,7 @@ export default function CoopTable({ compact = false }) {
       style={{ backgroundColor: 'var(--off-white)' }}
     >
       <div
-        className="max-w-editorial mx-auto"
+        className={`max-w-editorial mx-auto ${compact ? 'pt-[80px] md:pt-[100px]' : ''}`}
         style={{ paddingLeft: 'clamp(24px, 5vw, 80px)', paddingRight: 'clamp(24px, 5vw, 80px)' }}
       >
         <div className={`flex flex-col md:flex-row ${compact ? 'gap-6 md:gap-8' : 'gap-12 md:gap-16'}`}>
@@ -73,7 +73,7 @@ export default function CoopTable({ compact = false }) {
                 aria-label="Dharavi community structures data"
               >
                 <thead>
-                  <tr style={{ backgroundColor: 'var(--red-primary)' }}>
+                  <tr style={{ background: 'var(--gradient-brand)' }}>
                     <th
                       className="text-left font-ui font-semibold text-white uppercase"
                       style={{
@@ -108,11 +108,20 @@ export default function CoopTable({ compact = false }) {
                 </thead>
                 <tbody>
                   {TABLE_DATA.map((row, i) => (
-                    <tr
+                    <motion.tr
                       key={i}
                       style={{
                         backgroundColor: i % 2 === 0 ? 'var(--cream)' : '#FFFFFF',
                         borderBottom: '1px solid var(--border-table)',
+                        cursor: 'default',
+                      }}
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.25 + i * 0.1, ease: 'easeOut' }}
+                      whileHover={{ 
+                        backgroundColor: 'rgba(140, 0, 68, 0.05)',
+                        scale: 1.015,
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
                       }}
                     >
                       <td
@@ -146,7 +155,7 @@ export default function CoopTable({ compact = false }) {
                       >
                         {row.activity}
                       </td>
-                    </tr>
+                    </motion.tr>
                   ))}
                 </tbody>
               </table>

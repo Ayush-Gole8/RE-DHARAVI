@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 
@@ -8,42 +8,55 @@ export default function SectionDivider({ partNumber, title, description, imageSr
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
+  // Scroll parallax for the right-side documentary photograph
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  // Moves the image relative to scroll direction for depth
+  const imageY = useTransform(scrollYProgress, [0, 1], [-60, 60]);
+
   return (
     <section
       ref={ref}
       className="relative w-full overflow-hidden"
       style={{ height: fullHeight ? '100%' : '80vh', minHeight: '500px' }}
     >
-      {/* Crimson background */}
+      {/* Brand gradient background */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundColor: 'var(--red-primary)',
+          background: 'var(--gradient-brand)',
         }}
       />
 
-      {/* Right-side documentary photograph */}
+      {/* Right-side documentary photograph with scroll parallax */}
       {imageSrc && (
         <div
-          className="absolute top-0 right-0 h-full hidden md:block"
-          style={{ width: '40%' }}
+          className="absolute right-0 overflow-hidden hidden md:block"
+          style={{ width: '40%', height: '120%', top: '-10%' }}
         >
-          <Image
-            src={imageSrc}
-            alt={imageAlt || 'Documentary photograph'}
-            fill
-            className="object-cover"
-            style={{ filter: 'grayscale(100%) contrast(1.1)' }}
-            sizes="40vw"
-          />
+          <motion.div 
+            style={{ y: imageY, height: '100%', width: '100%', position: 'relative' }}
+          >
+            <Image
+              src={imageSrc}
+              alt={imageAlt || 'Documentary photograph'}
+              fill
+              className="object-cover"
+              style={{ filter: 'grayscale(100%) contrast(1.1)' }}
+              sizes="40vw"
+            />
+          </motion.div>
           {/* Overlay for text readability */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--red-primary) 0%, transparent 60%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--brand-rose) 0%, transparent 60%)' }} />
         </div>
       )}
 
       {/* Text content */}
       <div
-        className="relative z-10 flex flex-col justify-center h-full w-full md:max-w-[60%]"
+        className="relative z-10 flex flex-col justify-center h-full w-full md:max-w-[60%] pt-[80px] md:pt-[100px]"
         style={{ paddingLeft: 'clamp(24px, 5vw, 80px)', paddingRight: 'clamp(24px, 5vw, 80px)' }}
       >
         {/* Part label */}

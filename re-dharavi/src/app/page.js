@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -8,27 +8,39 @@ import SectionDivider from '@/components/SectionDivider';
 import EditorialRow from '@/components/EditorialRow';
 import LineChartPanel from '@/components/LineChartPanel';
 import ClippingTimeline from '@/components/ClippingTimeline';
-import MapPanel from '@/components/MapPanel';
 import CoopTable from '@/components/CoopTable';
 import NayaDharaviSection from '@/components/NayaDharaviSection';
 import AboutSection from '@/components/AboutSection';
 
+// New Components
+import OpeningAnimation from '@/components/OpeningAnimation';
+import GrowthTimeline from '@/components/GrowthTimeline';
+import EntrepreneurialSpirit from '@/components/EntrepreneurialSpirit';
+import DiversityCulture from '@/components/DiversityCulture';
+import VideoCards from '@/components/VideoCards';
+import NavbharatUpdates from '@/components/NavbharatUpdates';
+
 export default function Home() {
+  const [loadingComplete, setLoadingComplete] = useState(false);
   const horizontalRef = useRef(null);
+  
   const { scrollYProgress } = useScroll({
     target: horizontalRef,
     offset: ["start start", "end end"],
   });
 
-  // Overlapping right-to-left transitions for the horizontal stack (Slides 2 to 5 cover the previous slide)
-  // Slide 1 (Makeover Divider) is static as the base of the horizontal scroll track.
-  const x2 = useTransform(scrollYProgress, [0, 0.25], ['100vw', '0vw']);
-  const x3 = useTransform(scrollYProgress, [0.25, 0.5], ['100vw', '0vw']);
-  const x4 = useTransform(scrollYProgress, [0.5, 0.75], ['100vw', '0vw']);
-  const x5 = useTransform(scrollYProgress, [0.75, 1.0], ['100vw', '0vw']);
+  // Overlapping right-to-left transitions for the horizontal stack (3 slides total)
+  // Slide 1 (Part 02 Section Divider) is static in the background.
+  // Slide 2 slides in from 0 to 0.5 scroll progress.
+  // Slide 3 slides in from 0.5 to 1.0 scroll progress.
+  const x2 = useTransform(scrollYProgress, [0, 0.5], ['100vw', '0vw']);
+  const x3 = useTransform(scrollYProgress, [0.5, 1.0], ['100vw', '0vw']);
 
   return (
     <main style={{ backgroundColor: 'var(--off-white)' }}>
+      {/* Opening Animation Preloader */}
+      <OpeningAnimation onComplete={() => setLoadingComplete(true)} />
+
       {/* Fixed navbar overlay */}
       <Navbar />
 
@@ -66,12 +78,17 @@ export default function Home() {
         />
       </div>
 
-      {/* 4. Slide 3: Land of High Returns (Data Panel - Sticky vertical reveal) */}
+      {/* 4. Citizens Growth Timeline - Above Land of High Returns */}
+      <div className="relative z-25 w-full bg-off-white" style={{ boxShadow: '0 -20px 40px rgba(0,0,0,0.15)' }}>
+        <GrowthTimeline compact={true} />
+      </div>
+
+      {/* 5. Slide 3: Land of High Returns (Data Panel - Sticky vertical reveal) */}
       <div className="responsive-editorial-sticky z-30 w-full flex flex-col justify-center pt-[80px]" style={{ backgroundColor: 'var(--dark-navy)', boxShadow: '0 -20px 40px rgba(0,0,0,0.15)' }}>
         <LineChartPanel compact={true} />
       </div>
 
-      {/* 5. Horizontal Overlapping Slide Track - z-40 (scrolls naturally after Data Panel, then locks and slides horizontally right-to-left) */}
+      {/* 6. Horizontal Overlapping Slide Track - z-40 */}
       <div id="makeover" ref={horizontalRef} className="horizontal-track-container z-40" style={{ boxShadow: '0 -20px 40px rgba(0,0,0,0.15)' }}>
         <div className="horizontal-sticky-wrapper bg-off-white">
           {/* Slide 1: Part 02 Section Divider (Static initial slide in the background) */}
@@ -107,25 +124,9 @@ export default function Home() {
             />
           </motion.div>
 
-          {/* Slide 3: Newspaper Clipping Timeline (slides in horizontally on top of Slide 2) */}
+          {/* Slide 3: Community Structures Table (slides in horizontally on top of Slide 2) */}
           <motion.div
             style={{ x: x3, zIndex: 30 }}
-            className="horizontal-slide bg-off-white"
-          >
-            <ClippingTimeline compact={true} />
-          </motion.div>
-
-          {/* Slide 4: Sector IV Interactive Map (slides in horizontally on top of Slide 3) */}
-          <motion.div
-            style={{ x: x4, zIndex: 40, backgroundColor: 'var(--charcoal)' }}
-            className="horizontal-slide"
-          >
-            <MapPanel compact={true} />
-          </motion.div>
-
-          {/* Slide 5: Community Structures Table (slides in horizontally on top of Slide 4) */}
-          <motion.div
-            style={{ x: x5, zIndex: 50 }}
             className="horizontal-slide bg-off-white"
           >
             <CoopTable compact={true} />
@@ -133,11 +134,29 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 6. Resume Vertical Flow (Naya Dharavi & About Section) - z-40 (scrolls naturally after horizontal track finishes) */}
+      {/* 7. Resume Vertical Flow */}
       <div className="relative z-40 w-full bg-off-white" style={{ boxShadow: '0 -20px 40px rgba(0,0,0,0.15)' }}>
+        
+        {/* Paper Trails - overlapping card stack in vertical flow */}
+        <ClippingTimeline />
+
+        {/* Dharavi Entrepreneurial Spirit - cottage industries grid in vertical flow */}
+        <EntrepreneurialSpirit />
+
         <div id="naya-dharavi">
           <NayaDharaviSection />
         </div>
+        
+        {/* Dynamic Sector Profile Directory */}
+        <DiversityCulture />
+
+        {/* Swipeable Video Deck */}
+        <VideoCards />
+
+        {/* Dedicated News Section */}
+        <NavbharatUpdates />
+
+        {/* Redesigned About Section */}
         <AboutSection />
       </div>
     </main>

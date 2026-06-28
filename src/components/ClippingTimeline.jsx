@@ -9,13 +9,13 @@ const CLIPPINGS = [
     date: 'March 2004',
     headline: 'Maharashtra Announces Global Tender For Dharavi',
     body: 'A 239-hectare zone is opened to international developers under the DRP scheme.',
-    rotation: 1.5,
+    rotation: 1.2,
   },
   {
     date: 'July 2006',
     headline: 'Residents Form Collective Against Demolition',
     body: 'The Dharavi Bachao Andolan mobilises over 300 community leaders.',
-    rotation: -2,
+    rotation: -1.5,
   },
   {
     date: 'February 2008',
@@ -27,79 +27,82 @@ const CLIPPINGS = [
     date: 'September 2009',
     headline: 'Global Financial Crisis Delays Bids',
     body: 'Several international developers withdraw citing market conditions.',
-    rotation: -1.2,
+    rotation: -1.0,
   },
   {
     date: 'January 2010',
     headline: 'SPARC Documents Community Resistance',
     body: 'KRVIA and SPARC jointly publish this report as counter-record.',
-    rotation: 2.2,
+    rotation: 1.5,
   },
 ];
 
-export default function ClippingTimeline({ compact = false }) {
+export default function ClippingTimeline() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
     <section
       ref={ref}
-      className={`w-full ${compact ? 'py-4 md:py-8' : 'py-20 md:py-32'}`}
-      style={{ backgroundColor: 'var(--off-white)' }}
+      className="w-full py-20 md:py-32"
+      style={{ backgroundColor: 'var(--nbt-gray)', borderTop: '1px solid rgba(0, 0, 0, 0.05)' }}
     >
-      <div
-        className="max-w-editorial mx-auto"
-        style={{ paddingLeft: 'clamp(24px, 5vw, 80px)', paddingRight: 'clamp(24px, 5vw, 80px)' }}
-      >
+      <div className="nbt-container">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className={compact ? 'mb-4' : 'mb-12'}
-        >
-          <span className={`label-tag block ${compact ? 'mb-1' : 'mb-4'}`}>ARCHIVE</span>
+        <div className="mb-16">
+          <span className="label-tag block mb-4" style={{ color: 'var(--nbt-gold)', fontWeight: 600 }}>
+            ARCHIVE & PAPER TRAILS
+          </span>
           <h2
-            className="font-heading font-bold uppercase m-0"
-            style={{
-              fontSize: compact ? '32px' : '48px',
-              letterSpacing: '0.08em',
-              color: 'var(--charcoal)',
-            }}
+            className="font-display text-black m-0 uppercase"
+            style={{ fontSize: '72px', letterSpacing: '0.04em' }}
           >
             The Paper Trail
           </h2>
-        </motion.div>
-
-        {/* Desktop: horizontal scroll row, Mobile: vertical stack */}
-        <div className="hidden md:block">
-          <div
-            className="scroll-snap-x gap-8 pb-8"
-            style={{ paddingBottom: '20px' }}
-          >
-            {CLIPPINGS.map((clip, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
-              >
-                <NewsClipping {...clip} />
-              </motion.div>
-            ))}
-          </div>
+          <div className="mt-4" style={{ height: '2px', backgroundColor: 'var(--nbt-gold)', width: '80px' }} />
+          <p className="font-body mt-6 text-gray-600 max-w-[600px] text-sm">
+            [A vertical scroll-driven chronicle. Each record stacks sequentially, archiving milestones of citizens resistance.]
+          </p>
         </div>
 
-        {/* Mobile: vertical stack */}
-        <div className="flex flex-col gap-8 md:hidden items-center">
+        {/* Stack Container */}
+        <div className="flex flex-col items-center gap-16 w-full max-w-[800px] mx-auto relative">
           {CLIPPINGS.map((clip, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
+              className="sticky w-full"
+              style={{
+                top: `${100 + i * 90}px`,
+                zIndex: 10 + i,
+                paddingBottom: '20px',
+              }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
+              transition={{ duration: 0.6, delay: 0.05 }}
             >
-              <NewsClipping {...clip} />
+              <div 
+                className="bg-white rounded-lg p-8 shadow-md border hover:shadow-lg transition-shadow duration-300 transform"
+                style={{ 
+                  borderColor: 'rgba(0, 0, 0, 0.06)',
+                  rotate: `${clip.rotation}deg`
+                }}
+              >
+                <div className="flex justify-between items-center mb-4 border-b pb-4" style={{ borderColor: 'rgba(0, 0, 0, 0.06)' }}>
+                  <span className="font-heading font-semibold text-sm" style={{ color: 'var(--nbt-gold)', letterSpacing: '0.12em' }}>
+                    {clip.date.toUpperCase()}
+                  </span>
+                  <span className="font-heading font-bold text-gray-300" style={{ fontSize: '13px' }}>
+                    RECORD 0{i + 1}
+                  </span>
+                </div>
+                <h3 className="font-heading font-semibold text-2xl text-black leading-snug mb-4">
+                  {clip.headline}
+                </h3>
+                <p className="font-body text-gray-600 text-sm leading-relaxed m-0">
+                  {clip.body}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
