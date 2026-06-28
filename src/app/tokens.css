@@ -13,6 +13,12 @@
   /* Deep indigo — right anchor of the gradient */
   --brand-indigo:     #1C0855;
 
+  /* Navbharat Mumbai Palette */
+  --nbt-gold:         #8c6144;
+  --nbt-dark:         #0c0c0c;
+  --nbt-light:        #ffffff;
+  --nbt-gray:         #f9f9f9;
+
   /* ── Legacy mapped aliases (used throughout components) ─── */
   /* Primary "hero" background → deep rose */
   --red-primary:      #8C0044;
@@ -39,18 +45,18 @@
   /* Subtle tint for section backgrounds */
   --gradient-subtle:  linear-gradient(135deg, rgba(140,0,68,0.08) 0%, rgba(90,0,88,0.06) 50%, rgba(28,8,85,0.08) 100%);
 
-  /* ── Font Families ─────────────────────────────────────── */
-  --font-display:     'Bebas Neue', cursive;
-  --font-heading:     'Barlow Condensed', sans-serif;
-  --font-body:        'Libre Baskerville', serif;
-  --font-quote:       'Playfair Display', serif;
-  --font-newspaper:   'Special Elite', cursive;
-  --font-ui:          'Barlow', sans-serif;
+  /* ── Font Families (mimicking Navbharat Mumbai) ────────── */
+  --font-display:     var(--font-six-caps), 'Six Caps', sans-serif;
+  --font-heading:     var(--font-poppins), 'Poppins', sans-serif;
+  --font-body:        var(--font-poppins), 'Poppins', sans-serif;
+  --font-quote:       var(--font-poppins), 'Poppins', sans-serif;
+  --font-newspaper:   var(--font-martel-sans), 'Martel Sans', sans-serif;
+  --font-ui:          var(--font-poppins), 'Poppins', sans-serif;
 
   /* ── Typographic Scale ─────────────────────────────────── */
-  --fs-hero:            clamp(48px, 12vw, 160px);
-  --fs-section-header:  clamp(36px, 5vw, 72px);
-  --fs-sub-header:      clamp(22px, 3vw, 36px);
+  --fs-hero:            clamp(60px, 10vw, 140px);
+  --fs-section-header:  clamp(40px, 6vw, 84px);
+  --fs-sub-header:      clamp(24px, 3.5vw, 40px);
   --fs-pull-quote:      clamp(20px, 2.5vw, 32px);
   --fs-body:            clamp(15px, 1.2vw, 18px);
   --fs-caption:         12px;

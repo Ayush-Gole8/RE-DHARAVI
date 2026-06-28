@@ -68,73 +68,44 @@ export default function HeroSection() {
 
       {/* Layer 3: Text content with scroll parallax offset */}
       <motion.div
-        className="relative z-10 flex flex-col items-start w-full"
+        className="relative z-10 flex flex-col items-center justify-center w-full text-center"
         style={{
-          paddingLeft: 'clamp(24px, 5vw, 80px)',
-          paddingRight: 'clamp(24px, 5vw, 80px)',
-          maxWidth: '1440px',
+          paddingLeft: '24px',
+          paddingRight: '24px',
+          maxWidth: '1200px',
           y: textY,
         }}
       >
-        {/* "NAYA" label */}
-        <motion.span
-          className="font-heading font-bold uppercase block"
-          style={{
-            color: 'var(--orange-accent)',
-            fontSize: '18px',
-            letterSpacing: '0.2em',
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          NAYA
-        </motion.span>
-
-        {/* "DHARAVI" - clip-path reveal */}
-        <div className="overflow-hidden mt-2">
+        {/* "NAYA DHARAVI" - single line centered reveal using Six Caps */}
+        <div className="overflow-hidden mt-2 w-full text-center">
           <motion.h1
-            className="font-display text-white leading-none m-0 p-0"
+            className="font-display text-white leading-none m-0 p-0 text-center uppercase whitespace-nowrap"
             style={{
               fontSize: 'var(--fs-hero)',
-              letterSpacing: '0.05em',
+              letterSpacing: '0.04em',
+              whiteSpace: 'nowrap'
             }}
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
-            transition={{ duration: 0.7, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            DHARAVI
+            <strong className="font-bold text-white">NAYA</strong> DHARAVI
           </motion.h1>
         </div>
 
         {/* Sub-label */}
         <motion.p
-          className="font-heading text-white mt-4"
+          className="font-heading text-white mt-6 text-center"
           style={{
             fontWeight: 400,
             fontSize: '22px',
             letterSpacing: '0.04em',
           }}
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 1.4, ease: 'easeOut' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.2, ease: 'easeOut' }}
         >
           Interpreting, Imagining, Developing
-        </motion.p>
-
-        {/* Year + credit */}
-        <motion.p
-          className="font-ui text-white mt-3"
-          style={{
-            fontSize: '13px',
-            letterSpacing: '0.15em',
-            opacity: 0.6,
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.6 }}
-          transition={{ duration: 0.5, delay: 1.7 }}
-        >
-          2010 - SPARC × KRVIA
         </motion.p>
       </motion.div>
 

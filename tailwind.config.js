@@ -21,12 +21,12 @@ module.exports = {
         'table-border': 'var(--border-table)',
       },
       fontFamily: {
-        display: ['Bebas Neue', 'cursive'],
-        heading: ['Barlow Condensed', 'sans-serif'],
-        body: ['Libre Baskerville', 'serif'],
-        quote: ['Playfair Display', 'serif'],
-        newspaper: ['Special Elite', 'cursive'],
-        ui: ['Barlow', 'sans-serif'],
+        display: ['var(--font-display)', 'sans-serif'],
+        heading: ['var(--font-heading)', 'sans-serif'],
+        body: ['var(--font-body)', 'sans-serif'],
+        quote: ['var(--font-quote)', 'serif'],
+        newspaper: ['var(--font-newspaper)', 'sans-serif'],
+        ui: ['var(--font-ui)', 'sans-serif'],
       },
       fontSize: {
         'hero': 'clamp(80px, 12vw, 160px)',

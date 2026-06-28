@@ -114,37 +114,41 @@ export default function Navbar() {
         {mobileOpen && (
           <motion.div
             className="fixed inset-0 z-[55] flex flex-col items-center justify-center md:hidden"
-            style={{ background: 'var(--gradient-brand)' }}
+            style={{ 
+              backgroundColor: 'rgba(12, 12, 12, 0.98)',
+              backdropFilter: 'blur(20px)'
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.35 }}
           >
             {/* Logo in mobile menu */}
             <motion.div
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.4 }}
-              style={{ marginBottom: '48px' }}
+              transition={{ delay: 0.15, duration: 0.4 }}
+              style={{ marginBottom: '40px' }}
             >
               <Image
                 src="/images/brand-logo.PNG"
                 alt="Naya Dharavi Logo"
-                width={230}
-                height={42}
+                width={200}
+                height={36}
                 style={{
                   width: 'auto',
-                  height: '42px',
-                  filter: 'drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.45)) drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.2))',
+                  height: '36px',
                 }}
                 className="object-contain"
               />
             </motion.div>
 
-            <ul className="list-none m-0 p-0 flex flex-col items-center gap-8">
+            {/* Menu List */}
+            <ul className="list-none m-0 p-0 flex flex-col items-center gap-6 w-full max-w-[280px]">
               {NAV_LINKS.map((link, i) => (
                 <motion.li
                   key={link.href}
+                  className="w-full text-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
@@ -153,8 +157,11 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="font-heading font-bold text-2xl uppercase text-white no-underline hover:opacity-60 transition-opacity duration-200"
-                    style={{ letterSpacing: '0.1em' }}
+                    className="font-heading font-semibold text-xl uppercase text-white no-underline block py-3 transition-colors duration-200"
+                    style={{ 
+                      letterSpacing: '0.18em',
+                      borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+                    }}
                   >
                     {link.label}
                   </a>

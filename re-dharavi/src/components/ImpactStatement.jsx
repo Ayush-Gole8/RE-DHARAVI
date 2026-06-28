@@ -52,7 +52,7 @@ export default function ImpactStatement() {
           className="border-none mt-12 mb-6"
           style={{
             height: '2px',
-            backgroundColor: 'var(--red-primary)',
+            backgroundColor: 'var(--orange-accent)',
             maxWidth: '400px',
             transformOrigin: 'left',
           }}
@@ -72,7 +72,7 @@ export default function ImpactStatement() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 1.3, duration: 0.5 }}
         >
-          - RE: Dharavi, SPARC × KRVIA, 2010
+          - Naya Dharavi, SPARC × KRVIA, 2010
         </motion.p>
       </div>
     </section>

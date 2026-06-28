@@ -56,7 +56,7 @@ export default function EditorialRow({
         )}
 
         <div
-          className="max-w-editorial mx-auto"
+          className="max-w-editorial mx-auto pt-[80px] md:pt-[100px]"
           style={{
             paddingLeft: 'clamp(24px, 5vw, 80px)',
             paddingRight: 'clamp(24px, 5vw, 80px)',
@@ -168,18 +168,35 @@ export default function EditorialRow({
 
   const textContent = (
     <div className="relative z-10">
-      <span className="label-tag block mb-4">{label}</span>
-      <h3
-        className="font-heading font-bold uppercase m-0 leading-tight"
-        style={{
-          fontSize: 'clamp(32px, 4vw, 48px)',
-          letterSpacing: '0.08em',
-          color: 'var(--charcoal)',
-        }}
+      {/* Label */}
+      <motion.span
+        className="label-tag block mb-4"
+        initial={{ opacity: 0, y: 15 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        {heading}
-      </h3>
-      <p
+        {label}
+      </motion.span>
+
+      {/* Heading - Clip-path slide reveal */}
+      <div className="overflow-hidden mb-2">
+        <motion.h3
+          className="font-heading font-bold uppercase m-0 leading-tight"
+          style={{
+            fontSize: 'clamp(32px, 4vw, 48px)',
+            letterSpacing: '0.08em',
+            color: 'var(--charcoal)',
+          }}
+          initial={{ y: '100%' }}
+          animate={isInView ? { y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
+        >
+          {heading}
+        </motion.h3>
+      </div>
+
+      {/* Body text */}
+      <motion.p
         className={`font-body ${compact ? 'mt-3' : 'mt-6'}`}
         style={{
           fontSize: compact ? '15px' : '17px',
@@ -187,11 +204,33 @@ export default function EditorialRow({
           color: 'var(--charcoal)',
           maxWidth: '540px',
         }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
       >
         {body}
-      </p>
-      {pullQuote && <PullQuote quote={pullQuote} />}
-      {statNumber && <CalloutStat number={statNumber} label={statLabel} />}
+      </motion.p>
+
+      {/* PullQuote and Stats staggered reveals */}
+      {pullQuote && (
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+        >
+          <PullQuote quote={pullQuote} />
+        </motion.div>
+      )}
+
+      {statNumber && (
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5, ease: 'easeOut' }}
+        >
+          <CalloutStat number={statNumber} label={statLabel} />
+        </motion.div>
+      )}
     </div>
   );
 
@@ -234,9 +273,9 @@ export default function EditorialRow({
       ref={sectionRef}
       className={`relative ${compact ? 'py-4 md:py-8' : 'py-20 md:py-32'}`}
       style={{ backgroundColor: 'var(--off-white)' }}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.5 }}
     >
       {/* Ghost callout number */}
       {ghostNumber && (

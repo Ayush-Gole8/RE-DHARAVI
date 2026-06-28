@@ -1,13 +1,13 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 const ZONES = [
   {
     id: 'zone-a',
     name: 'Pottery',
-    fill: '#D4620A',
+    fill: '#8C0044',
     tooltip: 'Kumbharwada - Pottery District, est. population 5,000',
     points: '80,60 230,60 230,200 80,200',
     labelX: 155,
@@ -52,7 +52,7 @@ const ZONES = [
   {
     id: 'zone-f',
     name: 'Mixed Residential',
-    fill: '#B31B1B',
+    fill: '#1C0855',
     tooltip: 'Transit Camp - Mixed residential, highest density',
     points: '520,230 740,230 740,380 520,380',
     labelX: 630,
@@ -164,14 +164,18 @@ export default function MapPanel({ compact = false }) {
             {/* Zones */}
             {ZONES.map((zone) => (
               <g key={zone.id}>
-                {/* Zone polygon */}
-                <polygon
+                {/* Zone polygon with scale and stroke glow hover effect */}
+                <motion.polygon
                   points={zone.points}
                   fill={zone.fill}
-                  opacity={activeZone === zone.id ? 1.0 : 0.75}
-                  stroke="rgba(255,255,255,0.2)"
-                  strokeWidth="1"
-                  className="transition-opacity duration-200 cursor-pointer"
+                  animate={{
+                    opacity: activeZone === zone.id ? 1.0 : 0.75,
+                    scale: activeZone === zone.id ? 1.02 : 1,
+                    stroke: activeZone === zone.id ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.2)',
+                    strokeWidth: activeZone === zone.id ? 1.5 : 1,
+                  }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="cursor-pointer"
                   onMouseEnter={() => setActiveZone(zone.id)}
                   onMouseLeave={() => setActiveZone(null)}
                   onFocus={() => setActiveZone(zone.id)}
@@ -179,7 +183,7 @@ export default function MapPanel({ compact = false }) {
                   tabIndex={0}
                   role="button"
                   aria-label={`${zone.name} zone - ${zone.tooltip}`}
-                  style={{ outline: 'none' }}
+                  style={{ outline: 'none', transformOrigin: `${zone.labelX}px ${zone.labelY}px` }}
                 />
 
                 {/* Hatching pattern overlay for accessibility */}
@@ -190,8 +194,8 @@ export default function MapPanel({ compact = false }) {
                   pointerEvents="none"
                 />
 
-                {/* Zone label */}
-                <text
+                {/* Zone label with dynamic scale */}
+                <motion.text
                   x={zone.labelX}
                   y={zone.labelY}
                   textAnchor="middle"
@@ -200,10 +204,15 @@ export default function MapPanel({ compact = false }) {
                   fontFamily="Barlow, sans-serif"
                   fontWeight="600"
                   pointerEvents="none"
-                  opacity={0.9}
+                  animate={{
+                    scale: activeZone === zone.id ? 1.1 : 1,
+                    opacity: activeZone === zone.id ? 1.0 : 0.9,
+                  }}
+                  transition={{ duration: 0.2 }}
+                  style={{ transformOrigin: `${zone.labelX}px ${zone.labelY}px` }}
                 >
                   {zone.name}
-                </text>
+                </motion.text>
               </g>
             ))}
 
@@ -244,27 +253,36 @@ export default function MapPanel({ compact = false }) {
             </text>
           </svg>
 
-          {/* Tooltip */}
-          {activeZone && (
-            <div
-              className="absolute pointer-events-none z-20"
-              style={{
-                left: `${mousePos.x}px`,
-                top: `${mousePos.y - 50}px`,
-                backgroundColor: 'var(--charcoal)',
-                color: 'white',
-                fontFamily: 'var(--font-ui)',
-                fontSize: '13px',
-                padding: '8px 12px',
-                borderRadius: '4px',
-                whiteSpace: 'nowrap',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-                transform: 'translateX(-50%)',
-              }}
-            >
-              {ZONES.find((z) => z.id === activeZone)?.tooltip}
-            </div>
-          )}
+          {/* Glassmorphic animated Tooltip */}
+          <AnimatePresence>
+            {activeZone && (
+              <motion.div
+                className="absolute pointer-events-none z-20"
+                initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 15, scale: 0.95 }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
+                style={{
+                  left: `${mousePos.x}px`,
+                  top: `${mousePos.y - 55}px`,
+                  backgroundColor: 'rgba(13, 27, 42, 0.92)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  color: 'white',
+                  fontFamily: 'var(--font-ui)',
+                  fontSize: '13px',
+                  padding: '8px 14px',
+                  borderRadius: '6px',
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+                  transform: 'translateX(-50%)',
+                  transformOrigin: 'bottom center',
+                }}
+              >
+                {ZONES.find((z) => z.id === activeZone)?.tooltip}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         {/* Legend */}
