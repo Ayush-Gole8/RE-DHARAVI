@@ -139,6 +139,7 @@ export default function VideoCards() {
                     onFullView={() => setActiveVideo(video)}
                     globalUnmuted={globalUnmuted}
                     setGlobalUnmuted={setGlobalUnmuted}
+                    isModalOpen={!!activeVideo}
                   />
                 );
               })}
@@ -167,6 +168,7 @@ export default function VideoCards() {
                 key={video.id} 
                 video={video} 
                 onFullView={() => setActiveVideo(video)} 
+                isModalOpen={!!activeVideo}
               />
             ))}
           </div>
@@ -187,7 +189,7 @@ export default function VideoCards() {
 }
 
 /* Individual Video Card Component (Desktop Grid) */
-function VideoCard({ video, onFullView }) {
+function VideoCard({ video, onFullView, isModalOpen }) {
   const videoRef = useRef(null);
   const cardRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -205,6 +207,21 @@ function VideoCard({ video, onFullView }) {
       });
     }
   }, []);
+
+  // Mute and pause the video card when the modal is open
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isModalOpen) {
+        videoRef.current.muted = true;
+        videoRef.current.pause();
+      } else {
+        videoRef.current.muted = isMuted;
+        if (isPlaying) {
+          videoRef.current.play().catch(() => {});
+        }
+      }
+    }
+  }, [isModalOpen, isMuted, isPlaying]);
 
   // Sync volume state to video element
   useEffect(() => {
@@ -524,8 +541,7 @@ function VideoCard({ video, onFullView }) {
   );
 }
 
-/* Swipable Card Component (Mobile Card Stack Mode) */
-function SwipableCard({ video, index, onSwipe, onFullView, globalUnmuted, setGlobalUnmuted }) {
+function SwipableCard({ video, index, onSwipe, onFullView, globalUnmuted, setGlobalUnmuted, isModalOpen }) {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [volume, setVolume] = useState(0.8);
@@ -538,9 +554,9 @@ function SwipableCard({ video, index, onSwipe, onFullView, globalUnmuted, setGlo
   // Sync mute state to video element
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.muted = isMuted;
+      videoRef.current.muted = isModalOpen ? true : isMuted;
     }
-  }, [isMuted]);
+  }, [isMuted, isModalOpen]);
 
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-18, 18]);
@@ -549,14 +565,14 @@ function SwipableCard({ video, index, onSwipe, onFullView, globalUnmuted, setGlo
   // Autoplay top card, pause behind cards
   useEffect(() => {
     if (videoRef.current) {
-      if (index === 0) {
+      if (index === 0 && !isModalOpen) {
         videoRef.current.currentTime = 0;
         videoRef.current.play().catch((err) => console.log("Autoplay block:", err));
       } else {
         videoRef.current.pause();
       }
     }
-  }, [index]);
+  }, [index, isModalOpen]);
 
   // Sync volume state
   useEffect(() => {
