@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform, useInView } from 'framer-motion';
 
 // 5 Detailed Video Objects with distinct titles, speakers, and stylized overlays to match client videos
 const VIDEOS = [
@@ -62,6 +62,17 @@ export default function VideoCards() {
   const [activeVideo, setActiveVideo] = useState(null);
   const [cardStack, setCardStack] = useState(VIDEOS);
   const [isMobile, setIsMobile] = useState(false);
+  const [globalUnmuted, setGlobalUnmuted] = useState(false);
+
+  const sectionRef = useRef(null);
+  const isSectionInView = useInView(sectionRef, { amount: 0.15 });
+
+  // Reset global mute status when section is scrolled out of view
+  useEffect(() => {
+    if (!isSectionInView) {
+      setGlobalUnmuted(false);
+    }
+  }, [isSectionInView]);
 
   // Monitor screen width for mobile card stack mode
   useEffect(() => {
@@ -85,6 +96,7 @@ export default function VideoCards() {
 
   return (
     <section 
+      ref={sectionRef}
       className="w-full nbt-row-padding overflow-hidden relative"
       style={{ backgroundColor: 'var(--nbt-dark)' }}
     >
@@ -125,6 +137,8 @@ export default function VideoCards() {
                     index={index} 
                     onSwipe={handleSwipe}
                     onFullView={() => setActiveVideo(video)}
+                    globalUnmuted={globalUnmuted}
+                    setGlobalUnmuted={setGlobalUnmuted}
                   />
                 );
               })}
@@ -511,14 +525,22 @@ function VideoCard({ video, onFullView }) {
 }
 
 /* Swipable Card Component (Mobile Card Stack Mode) */
-function SwipableCard({ video, index, onSwipe, onFullView }) {
+function SwipableCard({ video, index, onSwipe, onFullView, globalUnmuted, setGlobalUnmuted }) {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
   const [volume, setVolume] = useState(0.8);
   const [showDropdown, setShowDropdown] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [swipeDir, setSwipeDir] = useState(null);
+
+  const isMuted = !globalUnmuted;
+
+  // Sync mute state to video element
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
 
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-18, 18]);
@@ -590,12 +612,10 @@ function SwipableCard({ video, index, onSwipe, onFullView }) {
     e.stopPropagation();
     if (index !== 0 || !videoRef.current) return;
     if (isMuted) {
-      setIsMuted(false);
-      videoRef.current.muted = false;
+      setGlobalUnmuted(true);
       if (volume === 0) setVolume(0.8);
     } else {
-      setIsMuted(true);
-      videoRef.current.muted = true;
+      setGlobalUnmuted(false);
     }
   };
 
@@ -603,10 +623,7 @@ function SwipableCard({ video, index, onSwipe, onFullView }) {
   const handleCardTap = () => {
     if (index !== 0) return;
     if (isMuted) {
-      setIsMuted(false);
-      if (videoRef.current) {
-        videoRef.current.muted = false;
-      }
+      setGlobalUnmuted(true);
     } else {
       // Toggle play/pause on subsequent taps
       handlePlayPause({ stopPropagation: () => {} });
@@ -802,11 +819,9 @@ function SwipableCard({ video, index, onSwipe, onFullView }) {
                 const val = parseFloat(e.target.value);
                 setVolume(val);
                 if (val > 0) {
-                  setIsMuted(false);
-                  if (videoRef.current) videoRef.current.muted = false;
+                  setGlobalUnmuted(true);
                 } else {
-                  setIsMuted(true);
-                  if (videoRef.current) videoRef.current.muted = true;
+                  setGlobalUnmuted(false);
                 }
               }}
               style={{
@@ -1078,7 +1093,7 @@ function VideoModal({ video, onClose }) {
 
         {/* Right Side: Information Sidebar */}
         <div className="w-full md:w-[320px] p-6 sm:p-8 flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/10 bg-neutral-900 text-white overflow-hidden max-h-[45vh] md:max-h-none">
-          <div className="overflow-y-auto no-scrollbar pr-2 mb-6 flex-1 min-h-0">
+          <div className="overflow-y-auto no-scrollbar pr-2 mb-6 flex-1 min-h-0 hidden md:block">
             <span className="text-[10px] text-yellow-400 font-bold uppercase tracking-widest block mb-2">
               {video.category}
             </span>
