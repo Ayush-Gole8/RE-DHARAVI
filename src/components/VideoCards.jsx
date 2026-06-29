@@ -3,132 +3,60 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 
-// 10 Detailed Video Objects with distinct titles, speakers, and stylized overlays to match screenshot
+// 5 Detailed Video Objects with distinct titles, speakers, and stylized overlays to match client videos
 const VIDEOS = [
   {
     id: 1,
-    title: 'The Kumbhars of Kumbharwada: Clay, Coal & Community',
-    duration: '4:20',
-    speaker: 'Harish Kumbhar',
-    videoUrl: '/videos/testvideo1.mp4',
-    description: 'An exploration of Kumbharwada, the pottery sector of Dharavi, where over 400 families sculpt clay pots, carrying forward a centuries-old heritage amidst urban development pressures.',
-    category: 'Clay Works',
+    title: 'Sector 6 SRA Notice: Matunga Railway Land',
+    duration: '3:15',
+    speaker: 'Official Announcement',
+    videoUrl: '/videos/video1.mp4',
+    description: 'An important update regarding the Dharavi Redevelopment Project has come to light. Under SRA, an official notice has been issued for the residents of Sector 6 Matunga, railway land. The process of giving eligible families permanent homes of 350 sq. ft., better facilities, and secure living has now moved forward. Construction is going to start soon, which is why residents have been requested to complete their rent agreements and vacate their premises. A dedicated facilitation center is also available for any help or information. Every Dharavikar\'s dream - our own permanent home.',
+    category: 'Sector 6 Matunga',
     overlayText: null
   },
   {
     id: 2,
-    title: '13th Compound: The Global Standard of Plastic Segregation',
-    duration: '6:15',
-    speaker: 'Ayesha Banu',
-    videoUrl: '/videos/testvideo2.mp4',
-    description: 'A deep-dive into the recycling industry of Dharavi. Discover how plastic waste is sorted, crushed, and pelletized, showcasing local innovations that process tons of garbage daily.',
-    category: 'Recycling Compound',
-    overlayText: {
-      pre: 'because',
-      main: 'Sabyasachi',
-      style: 'serif'
-    }
+    title: 'Dharavi Redevelopment: The New Phase',
+    duration: '2:45',
+    speaker: 'Community Leader',
+    videoUrl: '/videos/video2.mp4',
+    description: 'The redevelopment process in Dharavi area is now moving fast in a new phase. Residents are actively participating in documentation and verification process, which is giving strong support to the project. Through every meeting and guidance session, families are being given complete information about the process. Is initiative ka main objective logon ko better housing, organised infrastructure aur secure future dena hai. Now people can see both faith and hope about the new Dharavi. This is not just redevelopment, but preparation for better tomorrow for every family. Every Dharavikar\'s dream is to own a home.',
+    category: 'Redevelopment Process',
+    overlayText: null
   },
   {
     id: 3,
-    title: 'Negotiating the Rent: Commercial Tenancies in Sector II',
-    duration: '5:02',
-    speaker: 'Vijay Patil',
-    videoUrl: '/videos/testvideo3.mp4',
-    description: 'Understanding the complex informal renting systems and commercial cooperative agreements that keep businesses running in Sector II without standard regulatory frameworks.',
-    category: 'Cooperative Housing',
+    title: 'Documentation Drive: Sectors 2 & 3',
+    duration: '3:30',
+    speaker: 'Verification Officer',
+    videoUrl: '/videos/video3.mp4',
+    description: 'An important process is being organized for the residents of Sector 2 and Sector 3 on 18, 19 and 20 May. This initiative is considered to be a strong step towards development and better future of Dharavi. Residents are requested to reach on time with necessary documents and actively participate in this process. Complete guidance and answers to questions related to the process will be available there. Let\'s take a strong step towards Dharavi\'s new future.',
+    category: 'Sector 2 & 3',
     overlayText: null
   },
   {
     id: 4,
-    title: 'The Leather Artisans of Sector III',
-    duration: '3:45',
-    speaker: 'Karan Shah',
-    videoUrl: '/videos/testvideo4.mp4',
-    description: 'A visual journey through leather workshops producing high-quality bags, jackets, and accessories, which are exported worldwide and support thousands of skilled leather craftsmen.',
-    category: 'Leather Industry',
-    overlayText: {
-      main: 'always supposed',
-      style: 'elegant-thin'
-    }
-  },
-  {
-    id: 5,
-    title: 'Dharavi Foodways: The Pappad and Chikki Makers',
-    duration: '4:10',
-    speaker: 'Priya Sen',
-    videoUrl: '/videos/testvideo1.mp4',
-    description: 'Behind the scenes of the cottage food industries that supply snacks to Mumbai. Meet women artisans working collectively to produce crisp papads and sweet peanut chikkis.',
-    category: 'Cottage Industries',
-    overlayText: {
-      main: 'get a',
-      style: 'yellow-blocky'
-    }
-  },
-  {
-    id: 6,
-    title: 'Street-Side Retail and Informal Markets',
-    duration: '5:30',
-    speaker: 'Rahul Mehta',
-    videoUrl: '/videos/testvideo2.mp4',
-    description: 'Analysing the micro-retail transactions along the crowded transit lanes of Dharavi, where single square meters of street space are rented and shared for maximum efficiency.',
-    category: 'Informal Markets',
+    title: 'Survey Progress & Milestones',
+    duration: '4:12',
+    speaker: 'Field Representative',
+    videoUrl: '/videos/video4.mp4',
+    description: 'A new wave of change in Dharavi. People of Chawls, colonies and slum areas are taking part in surveys and documentation. So far survey of 91,321 houses has been completed, which shows people\'s faith. Every meeting is transparent and every voice is being listened carefully. This is not only development, but also a new and better Dharavi, everyone\'s support and development. Every Dharavikar\'s dream - own home.',
+    category: 'Housing Survey',
     overlayText: null
   },
   {
-    id: 7,
-    title: 'Designing Garments for the City',
-    duration: '4:55',
-    speaker: 'Sneha Rao',
-    videoUrl: '/videos/testvideo3.mp4',
-    description: 'Follow designer and tailor collaboration inside Dharavi garment hubs, where scraps are turned into high fashion and fast apparel for retail markets in Bandra and Colaba.',
-    category: 'Textile Industry',
-    overlayText: {
-      main: 'Until one day',
-      style: 'clean-white'
-    }
-  },
-  {
-    id: 8,
-    title: 'The Anxious Traveller: Discovering Dharavi',
-    duration: '6:40',
-    speaker: 'Neha Sharma',
-    videoUrl: '/videos/testvideo4.mp4',
-    description: 'A travel documentary tracking a tourist navigating the winding lanes of Dharavi, breaking preconceptions, and experiencing the overwhelming productivity and hospitality of residents.',
-    category: 'Community Tourism',
-    overlayText: {
-      main: 'ANXIOUS TRAVELLER',
-      sub: 'Episode-1',
-      style: 'tilted-yellow'
-    }
-  },
-  {
-    id: 9,
-    title: 'Harboring Dreams: Migrants in Mumbai',
-    duration: '7:15',
-    speaker: 'Captain Alok',
-    videoUrl: '/videos/testvideo1.mp4',
-    description: 'Archival testimonies of sailors, fishermen, and port workers who arrived at Mumbai docks decades ago, moving to Dharavi to set up shops and secure an affordable shelter.',
-    category: 'Migrant Histories',
-    overlayText: {
-      main: 'IN THE',
-      style: 'yellow-blocky'
-    }
-  },
-  {
-    id: 10,
-    title: 'The Voices of Tomorrow: Education in Dharavi',
-    duration: '3:12',
-    speaker: 'Zoya Khan',
-    videoUrl: '/videos/testvideo2.mp4',
-    description: 'Meet the young student leaders in Dharavi who are studying coding, running community podcasts, and developing mobile apps to address local waste management and sanitation challenges.',
-    category: 'Youth Leadership',
-    overlayText: {
-      main: 'so',
-      style: 'huge-white'
-    }
+    id: 5,
+    title: 'Understanding Rights & Redressal',
+    duration: '3:50',
+    speaker: 'Rights Counselor',
+    videoUrl: '/videos/video5.mp4',
+    description: 'Many questions and discussions are going on among the people regarding Dharavi development. Is process ka main objective residents ko better housing aur organised infrastructure dena hai. Documentation and verification is being considered a very important step for future security. Every family\'s participation is making the redevelopment process more stronger. People are able to understand their rights only with the right information and proper guidance. It is important to understand the official process by staying away from rumors. New Dharavi is now slowly moving towards a new future. "Every Dharavikar\'s dream - our own home."',
+    category: 'Rights & Guidance',
+    overlayText: null
   }
 ];
+
 
 export default function VideoCards() {
   const [activeVideo, setActiveVideo] = useState(null);
@@ -447,25 +375,9 @@ function VideoCard({ video, onFullView }) {
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
 
-      {/* Top Details */}
-      <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10 pointer-events-none">
-        <span className="bg-white/15 backdrop-blur-md text-[10px] text-white font-heading font-medium tracking-widest px-2.5 py-1 rounded-full uppercase">
-          {video.category}
-        </span>
-        <span className="text-[10px] text-white/70 font-mono tracking-widest">
-          {video.duration}
-        </span>
-      </div>
 
-      {/* Bottom text info */}
-      <div className="absolute bottom-16 left-4 right-4 z-10 pointer-events-none transition-all duration-300 group-hover:translate-y-[-10px]">
-        <h4 className="font-heading font-semibold text-sm text-white m-0 leading-snug drop-shadow-sm">
-          {video.title.split(':')[0]}
-        </h4>
-        <p className="font-body text-[10px] text-white/50 m-0 mt-1 uppercase tracking-wider font-semibold">
-          BY: {video.speaker}
-        </p>
-      </div>
+
+
 
       {/* CONTROL BAR ROW */}
       <div 
@@ -520,7 +432,10 @@ function VideoCard({ video, onFullView }) {
                 if (videoRef.current) videoRef.current.muted = true;
               }
             }}
-            className="w-10 sm:w-12 h-1 accent-white bg-white/20 rounded-lg appearance-none cursor-pointer hidden group-hover/volume:inline-block transition-all"
+            style={{
+              background: `linear-gradient(to right, #fff ${(isMuted ? 0 : volume) * 100}%, rgba(255, 255, 255, 0.2) ${(isMuted ? 0 : volume) * 100}%)`
+            }}
+            className="w-10 sm:w-12 h-1 accent-white rounded-lg appearance-none cursor-pointer hidden group-hover/volume:inline-block transition-all"
           />
         </div>
 
@@ -834,25 +749,9 @@ function SwipableCard({ video, index, onSwipe, onFullView }) {
         </div>
       )}
 
-      {/* Top Header Tag & Info */}
-      <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10 pointer-events-none">
-        <span className="bg-white/15 backdrop-blur-md text-[9px] text-white font-heading font-medium tracking-widest px-2.5 py-0.5 rounded-full uppercase">
-          {video.category}
-        </span>
-        <span className="text-[9px] text-white/70 font-mono tracking-widest">
-          {video.duration}
-        </span>
-      </div>
 
-      {/* Bottom Metadata Info */}
-      <div className="absolute bottom-16 left-4 right-4 z-10 pointer-events-none">
-        <h4 className="font-heading font-semibold text-xs text-white m-0 leading-snug drop-shadow-sm">
-          {video.title.split(':')[0]}
-        </h4>
-        <p className="font-body text-[9px] text-white/50 m-0 mt-0.5 uppercase tracking-wider font-semibold">
-          BY: {video.speaker}
-        </p>
-      </div>
+
+
 
       {/* CONTROL BAR ROW (Top card only) */}
       {index === 0 && (
@@ -910,7 +809,10 @@ function SwipableCard({ video, index, onSwipe, onFullView }) {
                   if (videoRef.current) videoRef.current.muted = true;
                 }
               }}
-              className="w-10 h-1 accent-white bg-white/20 rounded-lg appearance-none cursor-pointer"
+              style={{
+                background: `linear-gradient(to right, #fff ${(isMuted ? 0 : volume) * 100}%, rgba(255, 255, 255, 0.2) ${(isMuted ? 0 : volume) * 100}%)`
+              }}
+              className="w-10 h-1 accent-white rounded-lg appearance-none cursor-pointer"
             />
           </div>
 
@@ -995,6 +897,15 @@ function VideoModal({ video, onClose }) {
   const [isMuted, setIsMuted] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [progress, setProgress] = useState(0);
+
+  // Disable body scroll when modal is open
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
 
   // Close modal on Escape key press, Toggle play on Spacebar
   useEffect(() => {
@@ -1147,7 +1058,10 @@ function VideoModal({ video, onClose }) {
                   setVolume(val);
                   if (val > 0) setIsMuted(false);
                 }}
-                className="w-16 h-1 accent-white bg-white/20 rounded-lg appearance-none cursor-pointer"
+                style={{
+                  background: `linear-gradient(to right, #fff ${(isMuted ? 0 : volume) * 100}%, rgba(255, 255, 255, 0.2) ${(isMuted ? 0 : volume) * 100}%)`
+                }}
+                className="w-16 h-1 accent-white rounded-lg appearance-none cursor-pointer"
               />
             </div>
 
@@ -1163,8 +1077,8 @@ function VideoModal({ video, onClose }) {
         </div>
 
         {/* Right Side: Information Sidebar */}
-        <div className="w-full md:w-[320px] p-6 sm:p-8 flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/10 bg-neutral-900 text-white">
-          <div>
+        <div className="w-full md:w-[320px] p-6 sm:p-8 flex flex-col justify-between border-t md:border-t-0 md:border-l border-white/10 bg-neutral-900 text-white overflow-hidden max-h-[45vh] md:max-h-none">
+          <div className="overflow-y-auto no-scrollbar pr-2 mb-6 flex-1 min-h-0">
             <span className="text-[10px] text-yellow-400 font-bold uppercase tracking-widest block mb-2">
               {video.category}
             </span>
@@ -1175,7 +1089,7 @@ function VideoModal({ video, onClose }) {
               Testimony by: <strong className="text-white">{video.speaker}</strong>
             </p>
             <div className="w-12 h-[2px] bg-yellow-400 mb-6" />
-            <p className="font-body text-xs md:text-sm text-neutral-300 leading-relaxed font-light mb-6">
+            <p className="font-body text-xs md:text-sm text-neutral-300 leading-relaxed font-light">
               {video.description}
             </p>
           </div>
