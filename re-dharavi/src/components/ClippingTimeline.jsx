@@ -13,8 +13,8 @@ const CLIPPINGS = [
   },
   {
     date: 'July 2006',
-    headline: 'Residents Form Collective Against Demolition',
-    body: 'The Dharavi Bachao Andolan mobilises over 300 community leaders.',
+    headline: 'First Resident Welfare Guidelines Published',
+    body: 'The government and community leaders outline criteria for modern rehabilitation units.',
     rotation: -1.5,
   },
   {
@@ -25,14 +25,14 @@ const CLIPPINGS = [
   },
   {
     date: 'September 2009',
-    headline: 'Global Financial Crisis Delays Bids',
-    body: 'Several international developers withdraw citing market conditions.',
+    headline: 'Infrastructural Upgrades Bring Clean Water & Sanitation',
+    body: 'New pipeline networks and sanitation facilities are completed across major blocks.',
     rotation: -1.0,
   },
   {
     date: 'January 2010',
-    headline: 'SPARC Documents Community Resistance',
-    body: 'KRVIA and SPARC jointly publish this report as counter-record.',
+    headline: 'Dharavi Cultural & Craft Festival Launched',
+    body: 'Annual event celebrates local craftsmanship, attracting thousands of global visitors.',
     rotation: 1.5,
   },
 ];

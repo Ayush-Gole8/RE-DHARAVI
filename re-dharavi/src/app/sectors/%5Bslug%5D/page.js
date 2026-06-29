@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const SECTOR_DETAILS = {
   'sector-1': {
-    name: 'Sector I (Matunga East / Sion)',
+    name: 'Sector I',
     demographics: 'Estimated 15,000 households. Primarily mixed retail, local groceries, and transit-aligned workers.',
     history: 'Est. 1950s. Sector I formed as an extension of the Matunga labor encampments, housing municipal rail workers and early migrants.',
     trades: 'Small retail, food vendors, wood mills, and local tailoring yards.',
@@ -13,7 +13,7 @@ const SECTOR_DETAILS = {
     color: '#8C0044',
   },
   'sector-2': {
-    name: 'Sector II (Transit Camp / Sion)',
+    name: 'Sector II',
     demographics: 'Estimated 22,000 households. Highly diverse regional communities including families from Tamil Nadu, Uttar Pradesh, and Maharashtra.',
     history: 'Est. 1970s. Originally planned as temporary transit camps, it evolved into permanent multi-story chawl houses and community societies.',
     trades: 'Garment manufacturing workshops, embroidery units, and regional catering suppliers.',
@@ -21,7 +21,7 @@ const SECTOR_DETAILS = {
     color: '#8C6D3F',
   },
   'sector-3': {
-    name: 'Sector III (Shahu Nagar / Sion)',
+    name: 'Sector III',
     demographics: 'Estimated 18,000 households. A major hub for cottage industries and small industrial warehouses.',
     history: 'Est. 1960s. Sector III grew around leather curing and packaging yards, transitioning over decades into leather goods and textile printing.',
     trades: 'Leather apparel fabrication, plastic shredding mills, and cardboard box packaging yards.',
@@ -29,7 +29,7 @@ const SECTOR_DETAILS = {
     color: '#3A7D44',
   },
   'sector-4': {
-    name: 'Sector IV (Kumbharwada / Koliwada)',
+    name: 'Sector IV',
     demographics: 'Estimated 12,000 households. Distinct potter (Kumbhars) and fisherman (Kolis) quarters.',
     history: 'Est. 1880s (Kumbharwada) and pre-19th Century (Koliwada). One of the oldest settled segments of Dharavi.',
     trades: 'Pottery, clay moulding, brick firing, fresh fish markets, and boat repair workshops.',
@@ -37,7 +37,7 @@ const SECTOR_DETAILS = {
     color: '#4A6FA5',
   },
   'sector-5': {
-    name: 'Sector V (Kala Killa / Mahim)',
+    name: 'Sector V',
     demographics: 'Estimated 20,000 households. Tightly integrated with the Mahim nature park boundary.',
     history: 'Est. 1980s. Developed near the Mahim fort and marshy borders, becoming a critical reclamation ground for waste-sorting.',
     trades: 'Plastic collection, segregation, and pellet recycling mills, along with iron scrap sorting yards.',
