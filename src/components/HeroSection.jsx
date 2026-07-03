@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
+import VariableProximity from './VariableProximity';
 
 export default function HeroSection() {
   const containerRef = useRef(null);
@@ -76,10 +77,10 @@ export default function HeroSection() {
           y: textY,
         }}
       >
-        {/* "NAYA DHARAVI" - single line centered reveal using Six Caps */}
+        {/* "NAYA DHARAVI" - single line centered reveal using VariableProximity */}
         <div className="overflow-hidden mt-2 w-full text-center">
           <motion.h1
-            className="font-display text-white leading-none m-0 p-0 text-center uppercase whitespace-nowrap"
+            className="text-white leading-none m-0 p-0 text-center uppercase whitespace-nowrap"
             style={{
               fontSize: 'var(--fs-hero)',
               letterSpacing: '0.04em',
@@ -89,7 +90,15 @@ export default function HeroSection() {
             animate={{ y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <strong className="font-bold text-white">NAYA</strong> DHARAVI
+            <VariableProximity
+              label="NAYA DHARAVI"
+              className="variable-proximity-hero"
+              fromFontVariationSettings="'wght' 700, 'wdth' 75, 'opsz' 10"
+              toFontVariationSettings="'wght' 950, 'wdth' 130, 'opsz' 40"
+              containerRef={containerRef}
+              radius={200}
+              falloff="linear"
+            />
           </motion.h1>
         </div>
 

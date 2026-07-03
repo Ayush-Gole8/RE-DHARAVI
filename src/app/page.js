@@ -79,7 +79,7 @@ export default function Home() {
       </div>
 
       {/* 4. Citizens Growth Timeline - Above Land of High Returns */}
-      <div className="relative z-25 w-full bg-off-white" style={{ boxShadow: '0 -20px 40px rgba(0,0,0,0.15)' }}>
+      <div className="responsive-editorial-sticky w-full flex flex-col justify-center pt-[80px]" style={{ zIndex: 25, backgroundColor: 'var(--dark-navy)', boxShadow: '0 -20px 40px rgba(0,0,0,0.15)' }}>
         <GrowthTimeline compact={true} />
       </div>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Line } from 'react-chartjs-2';
 import { sharedChartOptions } from '@/lib/chartConfig';
@@ -9,12 +9,14 @@ import '@/lib/chartConfig';
 
 export default function GrowthTimeline({ compact = false }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [animateCharts, setAnimateCharts] = useState(false);
 
-  if (isInView && !animateCharts) {
-    setAnimateCharts(true);
-  }
+  useEffect(() => {
+    if (isInView) {
+      setAnimateCharts(true);
+    }
+  }, [isInView]);
 
   const timelineData = {
     labels: ['2004', '2005', '2006', '2007', '2008', '2009', '2010'],
@@ -114,7 +116,7 @@ export default function GrowthTimeline({ compact = false }) {
 
         {/* Chart */}
         <motion.div
-          className="mt-12 p-6 rounded-lg"
+          className="mt-12 p-6 rounded-lg w-full max-w-[850px] mx-auto"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255,255,255,0.05)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}

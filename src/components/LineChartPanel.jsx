@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Line } from 'react-chartjs-2';
 import { sharedChartOptions } from '@/lib/chartConfig';
@@ -10,13 +10,14 @@ import '@/lib/chartConfig';
 
 export default function LineChartPanel({ compact = false }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.6 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [animateCharts, setAnimateCharts] = useState(false);
 
-  // Trigger chart animation when in view
-  if (isInView && !animateCharts) {
-    setAnimateCharts(true);
-  }
+  useEffect(() => {
+    if (isInView) {
+      setAnimateCharts(true);
+    }
+  }, [isInView]);
 
   const residentialData = {
     labels: ['2007', '2008', '2009', '2010'],
