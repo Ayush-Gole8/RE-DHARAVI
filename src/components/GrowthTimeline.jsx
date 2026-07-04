@@ -116,13 +116,13 @@ export default function GrowthTimeline({ compact = false }) {
 
         {/* Chart */}
         <motion.div
-          className="mt-12 p-6 rounded-lg w-full max-w-[850px] mx-auto"
+          className="mt-6 md:mt-12 p-3 md:p-6 rounded-lg w-full max-w-[850px] mx-auto"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255,255,255,0.05)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <div style={{ position: 'relative', height: '320px', width: '100%' }}>
+          <div className="relative w-full h-[220px] md:h-[320px]">
             <Line data={timelineData} options={timelineOptions} />
           </div>
         </motion.div>
