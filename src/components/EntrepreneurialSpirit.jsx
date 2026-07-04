@@ -58,7 +58,7 @@ export default function EntrepreneurialSpirit() {
           </span>
           <h2 
             className="font-display m-0 text-black uppercase"
-            style={{ fontSize: '72px', letterSpacing: '0.04em' }}
+            style={{ fontSize: 'clamp(32px, 5.5vw, 72px)', letterSpacing: '0.04em' }}
           >
             Dharavi Entrepreneurial Spirit
           </h2>
@@ -77,7 +77,7 @@ export default function EntrepreneurialSpirit() {
         </div>
 
         {/* Industries Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
           {INDUSTRIES.map((industry, i) => (
             <motion.div
               key={i}
@@ -88,12 +88,12 @@ export default function EntrepreneurialSpirit() {
               style={{ borderColor: 'rgba(0, 0, 0, 0.06)' }}
             >
               {/* Image box */}
-              <div className="relative w-full h-[220px] overflow-hidden bg-gray-100">
+              <div className="relative w-full h-[110px] sm:h-[165px] md:h-[220px] overflow-hidden bg-gray-100">
                 <Image
                   src={industry.image}
                   alt={`Black and white documentary photo representing ${industry.name} industry`}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   style={{ filter: 'grayscale(100%) contrast(1.05)' }}
                 />
@@ -103,13 +103,13 @@ export default function EntrepreneurialSpirit() {
               </div>
 
               {/* Text box */}
-              <div className="p-6 flex flex-col flex-grow bg-white">
-                <h3 className="font-heading font-semibold text-lg text-black mb-3">
+              <div className="p-3 sm:p-4 md:p-6 flex flex-col flex-grow bg-white">
+                <h3 className="font-heading font-semibold text-sm sm:text-base md:text-lg text-black mb-1.5 md:mb-3">
                   {industry.name}
                 </h3>
                 <p 
-                  className="font-body text-sm text-gray-600 m-0"
-                  style={{ lineHeight: 1.6 }}
+                  className="font-body text-[11px] sm:text-xs md:text-sm text-gray-600 m-0"
+                  style={{ lineHeight: 1.5 }}
                 >
                   {industry.description}
                 </p>

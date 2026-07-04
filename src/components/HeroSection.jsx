@@ -114,7 +114,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.2, ease: 'easeOut' }}
         >
-          Interpreting, Imagining, Developing
+          The largest human-centric urban regeneration project in Asia
         </motion.p>
       </motion.div>
 

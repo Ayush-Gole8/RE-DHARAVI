@@ -71,7 +71,7 @@ export default function DiversityCulture() {
           </span>
           <h2 
             className="font-display m-0 text-black uppercase"
-            style={{ fontSize: '72px', letterSpacing: '0.04em' }}
+            style={{ fontSize: 'clamp(32px, 5.5vw, 72px)', letterSpacing: '0.04em' }}
           >
             Sectors & Neighborhood Directory
           </h2>
@@ -90,7 +90,7 @@ export default function DiversityCulture() {
         </div>
 
         {/* Sectors Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
           {SECTORS.map((sector, i) => (
             <motion.div
               key={sector.slug}
@@ -101,19 +101,19 @@ export default function DiversityCulture() {
               style={{ borderColor: 'rgba(0, 0, 0, 0.06)' }}
             >
               {/* Image with mini-map inset */}
-              <div className="relative w-full h-[200px] bg-gray-100">
+              <div className="relative w-full h-[110px] sm:h-[150px] md:h-[200px] bg-gray-100">
                 <Image
                   src={sector.image}
                   alt={`Photograph of ${sector.name}`}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 50vw, 33vw"
                   className="object-cover"
                   style={{ filter: 'grayscale(100%)' }}
                 />
                 
-                {/* SVG Mini-map inset */}
+                {/* SVG Mini-map inset - hidden on mobile for clean UI */}
                 <div 
-                  className="absolute bottom-3 right-3 p-2 rounded"
+                  className="absolute bottom-3 right-3 p-2 rounded hidden sm:block"
                   style={{ 
                     backgroundColor: 'rgba(12, 12, 12, 0.85)', 
                     backdropFilter: 'blur(4px)',
@@ -138,13 +138,13 @@ export default function DiversityCulture() {
               </div>
 
               {/* Information */}
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="font-heading font-semibold text-lg text-black mb-3">
+              <div className="p-3 sm:p-4 md:p-6 flex flex-col flex-grow">
+                <h3 className="font-heading font-semibold text-sm sm:text-base md:text-lg text-black mb-1 md:mb-3">
                   {sector.name}
                 </h3>
                 <p 
-                  className="font-body text-sm mb-6 flex-grow text-gray-600"
-                  style={{ lineHeight: 1.6 }}
+                  className="font-body text-[11px] sm:text-xs md:text-sm mb-3 md:mb-6 flex-grow text-gray-600"
+                  style={{ lineHeight: 1.5 }}
                 >
                   {sector.desc}
                 </p>
@@ -152,7 +152,7 @@ export default function DiversityCulture() {
                 {/* View Details CTA */}
                 <Link 
                   href={`/sectors/${sector.slug}`}
-                  className="font-heading font-semibold uppercase text-xs inline-flex items-center gap-2 no-underline tracking-wider hover:opacity-60 transition-opacity duration-200 mt-auto"
+                  className="font-heading font-semibold uppercase text-[10px] sm:text-xs inline-flex items-center gap-1 md:gap-2 no-underline tracking-wider hover:opacity-60 transition-opacity duration-200 mt-2 md:mt-auto"
                   style={{ color: 'var(--nbt-gold)' }}
                 >
                   Explore Neighborhood

@@ -7,9 +7,10 @@ import Image from 'next/image';
 const NAV_LINKS = [
   { label: 'Home', href: '#cover' },
   { label: 'Story', href: '#story' },
-  { label: 'Makeover', href: '#makeover' },
+  { label: 'DRP', href: '#makeover' },
   { label: 'Naya Dharavi', href: '#naya-dharavi' },
   { label: 'About', href: '#about' },
+  { label: 'Resident coordination', href: '/resident-coordination' },
 ];
 
 export default function Navbar() {
@@ -28,10 +29,19 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   const handleNavClick = (e, href) => {
-    e.preventDefault();
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    const isHomePage = typeof window !== 'undefined' && (window.location.pathname === '/' || window.location.pathname === '');
+
+    if (href.startsWith('#')) {
+      if (isHomePage) {
+        e.preventDefault();
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        e.preventDefault();
+        window.location.href = '/' + href;
+      }
+    }
   };
 
   return (

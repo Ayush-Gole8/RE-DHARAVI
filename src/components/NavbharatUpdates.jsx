@@ -48,7 +48,7 @@ export default function NavbharatUpdates() {
           </span>
           <h2 
             className="font-display m-0 text-black uppercase"
-            style={{ fontSize: '72px', letterSpacing: '0.04em' }}
+            style={{ fontSize: 'clamp(32px, 5.5vw, 72px)', letterSpacing: '0.04em' }}
           >
             Project Articles & News
           </h2>

@@ -55,7 +55,7 @@ export default function ClippingTimeline() {
           </span>
           <h2
             className="font-display text-black m-0 uppercase"
-            style={{ fontSize: '72px', letterSpacing: '0.04em' }}
+            style={{ fontSize: 'clamp(30px, 5.5vw, 72px)', letterSpacing: '0.04em' }}
           >
             The Paper Trail
           </h2>

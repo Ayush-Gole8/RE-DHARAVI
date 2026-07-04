@@ -120,7 +120,7 @@ export default function LineChartPanel({ compact = false }) {
           <span className="label-tag block mb-4">DATA</span>
           <h2
             className="font-display text-white m-0 leading-none"
-            style={{ fontSize: compact ? '36px' : '64px' }}
+            style={{ fontSize: compact ? 'clamp(24px, 4vw, 36px)' : 'clamp(32px, 5.5vw, 64px)' }}
           >
             Land of High Returns
           </h2>

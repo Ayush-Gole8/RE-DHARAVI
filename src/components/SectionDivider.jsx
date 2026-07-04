@@ -73,8 +73,8 @@ export default function SectionDivider({ partNumber, title, description, imageSr
         <motion.h2
           className="font-heading font-bold text-white uppercase leading-none m-0"
           style={{
-            fontSize: 'clamp(48px, 7vw, 96px)',
-            letterSpacing: '0.08em',
+            fontSize: 'clamp(28px, 5.5vw, 72px)',
+            letterSpacing: '0.04em',
           }}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}

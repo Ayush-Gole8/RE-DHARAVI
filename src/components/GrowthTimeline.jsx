@@ -97,9 +97,9 @@ export default function GrowthTimeline({ compact = false }) {
           </span>
           <h2
             className="font-display text-white m-0 leading-none uppercase"
-            style={{ fontSize: compact ? '36px' : '72px', letterSpacing: '0.04em' }}
+            style={{ fontSize: compact ? 'clamp(24px, 4vw, 36px)' : 'clamp(32px, 5.5vw, 72px)', letterSpacing: '0.04em' }}
           >
-            Citizen Mobilization Timeline
+            Citizen Participation & Trust
           </h2>
           <p
             className="font-body mt-6"
@@ -110,7 +110,7 @@ export default function GrowthTimeline({ compact = false }) {
               lineHeight: 1.7,
             }}
           >
-            A chronicle of growing community organizing, neighborhood assembly meetings, and official property registration enrollment count between 2004 and 2010.
+            More than 85% of residents actively participated in surveys, document submission, and agreement signing, reflecting strong community trust.
           </p>
         </motion.div>
 

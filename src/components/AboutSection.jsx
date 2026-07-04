@@ -84,7 +84,7 @@ export default function AboutSection() {
               </span>
               <h2
                 className="font-display text-white m-0 uppercase leading-none"
-                style={{ fontSize: '72px', letterSpacing: '0.05em' }}
+                style={{ fontSize: 'clamp(32px, 5.5vw, 72px)', letterSpacing: '0.05em' }}
               >
                 NAYA DHARAVI
               </h2>

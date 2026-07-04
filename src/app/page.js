@@ -55,7 +55,7 @@ export default function Home() {
         <SectionDivider
           partNumber="01"
           title="The Dharavi Story"
-          description="A million lives. A thousand trades. One fiercely contested square mile holding the soul of Mumbai."
+          description="A million aspirations. Thousands of enterprises. A future for every family. One shared vision for a world-class, inclusive urban redevelopment"
           imageSrc="/images/dharavi-street.png"
           imageAlt="Black and white documentary photograph of a busy narrow street in Dharavi, Mumbai, showing workers and small shops"
           fullHeight={true}
@@ -92,11 +92,11 @@ export default function Home() {
       <div id="makeover" ref={horizontalRef} className="horizontal-track-container z-40" style={{ boxShadow: '0 -20px 40px rgba(0,0,0,0.15)' }}>
         <div className="horizontal-sticky-wrapper bg-off-white">
           {/* Slide 1: Part 02 Section Divider (Static initial slide in the background) */}
-          <div className="horizontal-slide bg-off-white" style={{ zIndex: 10 }}>
+          <div className="horizontal-slide bg-off-white section-divider-slide" style={{ zIndex: 10 }}>
             <SectionDivider
               partNumber="02"
-              title="Makeover or Takeover"
-              description="When global capital meets local resilience, whose vision of the future prevails?"
+              title="Dharavi redevelopment project"
+              description="It is a project to improve living conditions in Dharavi by providing safe, modern homes, better infrastructure, and a healthier environment-while protecting Dharavi's community, culture, and livelihoods"
               imageSrc="/images/dharavi-rooftop.png"
               imageAlt="Black and white photograph of dense residential buildings in Dharavi seen from a rooftop perspective"
               fullHeight={true}

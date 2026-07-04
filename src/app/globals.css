@@ -196,6 +196,11 @@
       padding-bottom: 60px !important;
       overflow-y: visible !important;
     }
+
+    .section-divider-slide {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
   }
 }
 
