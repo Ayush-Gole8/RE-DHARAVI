@@ -140,22 +140,26 @@ export default function LineChartPanel({ compact = false }) {
 
         {/* Charts grid */}
         <motion.div
-          className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 ${compact ? 'mt-4' : 'mt-12'}`}
+          className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 ${compact ? 'mt-4' : 'mt-12'}`}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <div
-            className="p-6 rounded-lg"
+            className="p-3 md:p-6 rounded-lg"
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
           >
-            <Line data={residentialData} options={residentialOptions} />
+            <div className="relative w-full h-[220px] md:h-[320px]">
+              <Line data={residentialData} options={residentialOptions} />
+            </div>
           </div>
           <div
-            className="p-6 rounded-lg"
+            className="p-3 md:p-6 rounded-lg"
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
           >
-            <Line data={commercialData} options={commercialOptions} />
+            <div className="relative w-full h-[220px] md:h-[320px]">
+              <Line data={commercialData} options={commercialOptions} />
+            </div>
           </div>
         </motion.div>
       </div>
