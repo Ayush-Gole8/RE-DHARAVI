@@ -136,62 +136,86 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="fixed inset-0 z-[55] flex flex-col items-center justify-center md:hidden"
+            className="fixed inset-0 z-[55] flex flex-col justify-between md:hidden"
             style={{ 
-              backgroundColor: 'rgba(18, 4, 56, 0.98)',
+              backgroundColor: 'var(--dark-navy)',
+              backgroundImage: 'radial-gradient(circle at 100% 0%, rgba(140,0,68,0.2) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(217,110,175,0.1) 0%, transparent 50%)',
               backdropFilter: 'blur(20px)'
             }}
-            initial={{ x: '100vw' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100vw' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            initial={{ opacity: 0, clipPath: 'circle(0% at 100% 0%)' }}
+            animate={{ opacity: 1, clipPath: 'circle(150% at 100% 0%)' }}
+            exit={{ opacity: 0, clipPath: 'circle(0% at 100% 0%)' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Logo in mobile menu */}
+            {/* Top spacer for close button */}
+            <div className="h-[80px] shrink-0" />
+
+            <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 overflow-y-auto no-scrollbar pb-8">
+              {/* Menu List */}
+              <ul className="list-none m-0 p-0 flex flex-col items-stretch w-full">
+                {NAV_LINKS.map((link, i) => (
+                  <motion.li
+                    key={link.href}
+                    className="w-full relative group"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ delay: 0.15 + i * 0.1, duration: 0.5, ease: 'easeOut' }}
+                  >
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="relative flex items-center justify-between font-heading font-semibold text-lg sm:text-xl uppercase text-white/80 no-underline py-5 transition-all duration-300 hover:text-white hover:pl-2"
+                      style={{ 
+                        letterSpacing: '0.12em',
+                        borderBottom: '1px solid rgba(255, 255, 255, 0.06)'
+                      }}
+                    >
+                      <span className="flex items-center gap-5">
+                        <span 
+                          className="font-display text-3xl font-light mt-1 transition-colors duration-300"
+                          style={{ color: 'var(--brand-magenta)' }}
+                        >
+                          0{i + 1}
+                        </span>
+                        <span>{link.label}</span>
+                      </span>
+                      <svg 
+                        className="w-4 h-4 text-white/20 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white/60" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Menu Footer */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ delay: 0.1, duration: 0.3 }}
-              style={{ marginBottom: '40px' }}
+              className="w-full pb-8 pt-6 px-8 flex flex-col items-center sm:items-start border-t"
+              style={{ borderColor: 'rgba(255, 255, 255, 0.05)' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
             >
               <Image
                 src="/images/logowhite-cropped.PNG"
                 alt="Naya Dharavi Logo"
-                width={200}
-                height={36}
-                style={{
-                  width: 'auto',
-                  height: '36px',
-                }}
-                className="object-contain"
+                width={160}
+                height={30}
+                style={{ width: 'auto', height: '24px', opacity: 0.9 }}
+                className="object-contain mb-3"
               />
+              <p className="font-ui text-[10px] uppercase tracking-[0.15em] text-white/40 text-center sm:text-left m-0 leading-relaxed">
+                Naya Dharavi © 2026<br/>
+                Independent Citizen Archive
+              </p>
             </motion.div>
-
-            {/* Menu List */}
-            <ul className="list-none m-0 p-0 flex flex-col items-center gap-6 w-full max-w-[280px]">
-              {NAV_LINKS.map((link, i) => (
-                <motion.li
-                  key={link.href}
-                  className="w-full text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ delay: 0.1 + i * 0.08, duration: 0.3 }}
-                >
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="font-heading font-semibold text-xl uppercase text-white no-underline block py-3 transition-colors duration-200"
-                    style={{ 
-                      letterSpacing: '0.18em',
-                      borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
-                    }}
-                  >
-                    {link.label}
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
           </motion.div>
         )}
       </AnimatePresence>
