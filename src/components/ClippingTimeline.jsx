@@ -2,11 +2,13 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 
 const CLIPPINGS = [
   {
     date: 'May 15, 2025',
     publisher: 'The Economic Times (Marathi)',
+    logo: '/images/economictimes1.png',
     headline: "Dharavi Rehabilitation Speeds Up: Pre-Monsoon Relocation Appeal; Rent Subsidies, Relocation Support, and Help Centers Available",
     body: "An official from the Dharavi Redevelopment Project (DRP) stated that early relocation will allow construction to start simultaneously in multiple locations, making rehabilitated homes available sooner.",
     link: 'https://marathi.economictimes.com/business-news/rehabilitation-work-in-dharavi-gathers-momentum-pre-monsoon-relocation-rent-subsidies-relocation-assistance-and-help-centers-available/articleshow/130256780.cms',
@@ -15,6 +17,7 @@ const CLIPPINGS = [
   {
     date: 'June 12, 2025',
     publisher: 'ThePrint',
+    logo: '/images/theprint.png',
     headline: "Need moves on Dharavi revamp, work on 1st set of rehabilitation houses to be begin post monsoon",
     body: "The first set of 11,000 tenements, each 350 square feet, will be constructed in Dharavi’s Sector 6, which refers to the Matunga railway land obtained from Railways.",
     link: 'https://theprint.in/india/needle-moves-on-dharavi-revamp-work-on-1st-set-of-rehabilitation-houses-to-be-begin-post-monsoon/2904658/',
@@ -23,6 +26,7 @@ const CLIPPINGS = [
   {
     date: 'June 20, 2025',
     publisher: 'Mid-day',
+    logo: '/images/midday.png',
     headline: "Dharavi redevelopment project: Dharavi’s redevelopment is our social commitment, says Maharashtra deputy CM Eknath Shinde",
     body: "A day after the master plan of the ambitious Dharavi redevelopment project in Mumbai was given approval, Eknath Shinde said its was govt’s social commitment.",
     link: 'https://share.google/4abPtqlV5deErgri',
@@ -31,6 +35,7 @@ const CLIPPINGS = [
   {
     date: 'June 25, 2025',
     publisher: 'ABP Live English',
+    logo: '/images/abplive.jpeg',
     headline: "‘Not Just Real Estate’: Pranav Adani Outlines 20-Year Vision For Dharavi Transformation",
     body: "He added that this character continues to define the city. 'One thing that I still see is that the people are still full of resilience and dreams and are very entrepreneurial.'",
     link: 'https://share.google/ZPm2nPM7KQBpVu4U9',
@@ -39,6 +44,7 @@ const CLIPPINGS = [
   {
     date: 'July 2, 2025',
     publisher: 'The New Indian Express',
+    logo: '/images/thenewindian.jpeg',
     headline: "Dharavi Revamp Master Plan Approved: Construction of First Set of Tenements to Begin Post-Monsoon",
     body: "Following the cabinet approval of the master plan, transit and rehabilitation infrastructure development gathers momentum.",
     link: 'https://share.google/5S1RnahtP8pvN34Gq',
@@ -98,7 +104,16 @@ export default function ClippingTimeline() {
                 }}
               >
                 <div className="flex justify-between items-center mb-4 border-b pb-4" style={{ borderColor: 'rgba(0, 0, 0, 0.06)' }}>
-                  <span className="font-heading font-semibold text-xs" style={{ color: 'var(--nbt-gold)', letterSpacing: '0.08em' }}>
+                  <span className="font-heading font-semibold text-xs flex items-center gap-2" style={{ color: 'var(--nbt-gold)', letterSpacing: '0.08em' }}>
+                    {clip.logo && (
+                      <Image
+                        src={clip.logo}
+                        alt={`${clip.publisher} Logo`}
+                        width={24}
+                        height={24}
+                        className="object-contain mix-blend-multiply"
+                      />
+                    )}
                     {clip.publisher.toUpperCase()} — {clip.date.toUpperCase()}
                   </span>
                   <span className="font-heading font-bold text-gray-300" style={{ fontSize: '13px' }}>

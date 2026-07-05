@@ -137,13 +137,13 @@ export default function Home() {
                   >
                     Navbharat Mega Developers
                   </h3>
-                  <div className="relative w-[180px] h-[45px] flex-shrink-0 bg-white px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm flex items-center justify-center overflow-hidden">
+                  <div className="relative w-[180px] h-[45px] flex-shrink-0 bg-transparent flex items-center justify-center overflow-hidden">
                     <Image
-                      src="/images/drppl_logo_dark.png"
+                      src="/images/nblogo.jpeg"
                       alt="Navbharat Logo"
                       width={160}
-                      height={35}
-                      className="object-contain"
+                      height={45}
+                      className="object-contain mix-blend-multiply"
                     />
                   </div>
                 </div>
