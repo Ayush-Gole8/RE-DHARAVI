@@ -6,12 +6,12 @@ import Image from 'next/image';
 
 const INDUSTRIES = [
   {
-    name: 'Pottery (Kumbharwada)',
+    name: 'Pottery',
     description: 'The historic potter community shaping clay vessels, lanterns, and structural ceramics, operating across generational kiln compound sectors.',
     image: '/images/dharavi-pottery.png',
   },
   {
-    name: 'Recycling Hub (13th Compound)',
+    name: 'Recycling Hub',
     description: 'Dharavi\'s plastic and solid waste reclamation network, transforming massive industrial waste from across Mumbai back into raw pellets.',
     image: '/images/dharavi-street.png',
   },

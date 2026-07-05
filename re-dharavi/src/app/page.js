@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import SectionDivider from '@/components/SectionDivider';
@@ -18,7 +19,6 @@ import GrowthTimeline from '@/components/GrowthTimeline';
 import EntrepreneurialSpirit from '@/components/EntrepreneurialSpirit';
 import DiversityCulture from '@/components/DiversityCulture';
 import VideoCards from '@/components/VideoCards';
-import NavbharatUpdates from '@/components/NavbharatUpdates';
 
 export default function Home() {
   const [loadingComplete, setLoadingComplete] = useState(false);
@@ -103,25 +103,91 @@ export default function Home() {
             />
           </div>
 
-          {/* Slide 2: Redevelopment Editorial Row (slides in horizontally on top of Slide 1) */}
+          {/* Slide 2: Navbharat Mega Developer Section (slides in horizontally on top of Slide 1) */}
           <motion.div
             style={{ x: x2, zIndex: 20 }}
             className="horizontal-slide bg-off-white"
           >
-            <EditorialRow
-              reversed={true}
-              ghostNumber="02"
-              label="REDEVELOPMENT"
-              heading="The ₹15,000 Crore Question"
-              body="In 2004, the Maharashtra government announced the Dharavi Redevelopment Project, inviting global developers to bid on five sectors. The plan promised free housing for residents but failed to account for the 57 categories of livelihoods operating within the informal economy."
-              pullQuote="Redevelopment was never designed with residents - it was designed around them."
-              statNumber="57"
-              statLabel="distinct livelihood categories threatened"
-              imageSrc="/images/dharavi-street.png"
-              imageAlt="Documentary photograph showing Dharavi sector zones proposed for redevelopment"
-              imageCaption="Sector IV - Proposed Redevelopment Zones"
-              splitCompact={true}
-            />
+            <div className="relative py-4 md:py-8 w-full">
+              <span
+                className="ghost-number"
+                style={{
+                  top: '10px',
+                  left: 'clamp(24px, 5vw, 80px)',
+                }}
+              >
+                02
+              </span>
+              <div
+                className="max-w-editorial mx-auto pt-[80px] md:pt-[100px]"
+                style={{
+                  paddingLeft: 'clamp(24px, 5vw, 80px)',
+                  paddingRight: 'clamp(24px, 5vw, 80px)',
+                }}
+              >
+                {/* Heading & Logo Row - Full Width */}
+                <div className="flex items-center gap-6 mb-8 flex-wrap md:flex-nowrap">
+                  <h3
+                    className="font-heading font-bold uppercase m-0 leading-none"
+                    style={{
+                      fontSize: 'clamp(24px, 3vw, 36px)',
+                      letterSpacing: '0.06em',
+                      color: 'var(--charcoal)',
+                    }}
+                  >
+                    Navbharat Mega Developers
+                  </h3>
+                  <div className="relative w-[180px] h-[45px] flex-shrink-0 bg-white px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm flex items-center justify-center overflow-hidden">
+                    <Image
+                      src="/images/drppl_logo_dark.png"
+                      alt="Navbharat Logo"
+                      width={160}
+                      height={35}
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col md:flex-row gap-8 items-start">
+                  {/* Left Column (45%): Building Image */}
+                  <div className="w-full md:w-[45%] flex flex-col gap-4">
+                    <div
+                      className="relative overflow-hidden w-full flex items-center justify-center rounded-2xl bg-white border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-md"
+                      style={{ minHeight: '260px', height: '260px' }}
+                    >
+                      <Image
+                        src="/images/developer-building.png"
+                        alt="Navbharat Modern Building Rendering"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 45vw"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Right Column (55%): Label & Body */}
+                  <div className="w-full md:w-[55%] flex flex-col gap-6 pt-0 md:pt-4">
+                    <span className="label-tag block" style={{ color: 'var(--nbt-gold)', fontWeight: 600 }}>
+                      REDEVELOPMENT PARTNER
+                    </span>
+                    <p
+                      className="font-body m-0"
+                      style={{
+                        fontSize: 'clamp(16px, 1.5vw, 20px)',
+                        lineHeight: 1.7,
+                        color: 'var(--charcoal)',
+                        maxWidth: '540px',
+                      }}
+                    >
+                      Navbharat Mega Developers aims to transform and revitalise Dharavi into a world-class township while preserving its vibrant community, rich culture, and entrepreneurial spirit.
+                    </p>
+                    <div 
+                      style={{ height: '2px', backgroundColor: 'var(--nbt-gold)', width: '60px' }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
           {/* Slide 3: Community Structures Table (slides in horizontally on top of Slide 2) */}
@@ -152,9 +218,6 @@ export default function Home() {
 
         {/* Swipeable Video Deck */}
         <VideoCards />
-
-        {/* Dedicated News Section */}
-        <NavbharatUpdates />
 
         {/* Redesigned About Section */}
         <AboutSection />

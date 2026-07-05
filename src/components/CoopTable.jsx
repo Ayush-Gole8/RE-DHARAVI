@@ -67,38 +67,32 @@ export default function CoopTable({ compact = false }) {
           >
             <div className="overflow-x-auto">
               <table
-                className="w-full border-collapse"
-                style={{ minWidth: '400px' }}
+                className="w-full border-collapse table-fixed md:table-auto"
+                style={{ minWidth: '100%' }}
                 role="table"
                 aria-label="Dharavi community structures data"
               >
                 <thead>
                   <tr style={{ background: 'var(--gradient-brand)' }}>
                     <th
-                      className="text-left font-ui font-semibold text-white uppercase"
+                      className="text-left font-ui font-semibold text-white uppercase text-[10px] sm:text-xs p-2 sm:p-3 md:p-4 w-[32%] sm:w-[35%]"
                       style={{
-                        fontSize: '12px',
-                        padding: '12px 16px',
                         letterSpacing: '0.08em',
                       }}
                     >
                       Type
                     </th>
                     <th
-                      className="text-left font-ui font-semibold text-white uppercase"
+                      className="text-left font-ui font-semibold text-white uppercase text-[10px] sm:text-xs p-2 sm:p-3 md:p-4 w-[18%] sm:w-[15%]"
                       style={{
-                        fontSize: '12px',
-                        padding: '12px 16px',
                         letterSpacing: '0.08em',
                       }}
                     >
                       Count
                     </th>
                     <th
-                      className="text-left font-ui font-semibold text-white uppercase"
+                      className="text-left font-ui font-semibold text-white uppercase text-[10px] sm:text-xs p-2 sm:p-3 md:p-4 w-[50%] sm:w-[50%]"
                       style={{
-                        fontSize: '12px',
-                        padding: '12px 16px',
                         letterSpacing: '0.08em',
                       }}
                     >
@@ -125,10 +119,8 @@ export default function CoopTable({ compact = false }) {
                       }}
                     >
                       <td
-                        className="font-ui"
+                        className="font-ui text-xs sm:text-sm p-2 sm:p-3 md:p-4 break-words"
                         style={{
-                          fontSize: '14px',
-                          padding: '12px 16px',
                           color: 'var(--charcoal)',
                           fontWeight: 500,
                         }}
@@ -136,20 +128,16 @@ export default function CoopTable({ compact = false }) {
                         {row.type}
                       </td>
                       <td
-                        className="font-ui"
+                        className="font-ui text-xs sm:text-sm p-2 sm:p-3 md:p-4"
                         style={{
-                          fontSize: '14px',
-                          padding: '12px 16px',
                           color: 'var(--charcoal)',
                         }}
                       >
                         {row.count}
                       </td>
                       <td
-                        className="font-ui"
+                        className="font-ui text-xs sm:text-sm p-2 sm:p-3 md:p-4 break-words"
                         style={{
-                          fontSize: '14px',
-                          padding: '12px 16px',
                           color: 'var(--charcoal)',
                         }}
                       >

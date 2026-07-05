@@ -1,10 +1,25 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import AboutSection from '@/components/AboutSection';
 
+const GALLERY_ITEMS = [
+  { id: 1, src: '/images/RC_1.jpeg' },
+  { id: 2, src: '/images/RC_2.jpeg' },
+  { id: 3, src: '/images/RC_3.jpeg' },
+  { id: 4, src: '/images/RC_4.jpeg' },
+  { id: 5, src: '/images/RC_5.jpeg' },
+  { id: 6, src: '/images/RC_6.jpeg' },
+  { id: 7, src: '/images/RC_7.jpeg' },
+  { id: 8, src: '/images/RC_8.jpeg' }
+];
+
 export default function ResidentCoordination() {
+  const [activeIndex, setActiveIndex] = useState(null);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -18,6 +33,25 @@ export default function ResidentCoordination() {
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
+  const galleryContainerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+      }
+    }
+  };
+
+  const galleryItemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { duration: 0.6, ease: [0.215, 0.610, 0.355, 1.000] } 
+    }
   };
 
   return (
@@ -163,8 +197,151 @@ export default function ResidentCoordination() {
               </ul>
             </motion.div>
           </motion.div>
+
+          {/* Ground Engagement & Meeting Gallery */}
+          <div className="mt-24 md:mt-32">
+            <div className="mb-12 text-center">
+              <span 
+                className="label-tag inline-block mb-3 text-xs tracking-widest font-semibold uppercase"
+                style={{ color: 'var(--nbt-gold)' }}
+              >
+                ON-GROUND ENGAGEMENT
+              </span>
+              <h2 
+                className="font-heading font-bold uppercase m-0 leading-tight"
+                style={{
+                  fontSize: 'clamp(28px, 3.5vw, 44px)',
+                  letterSpacing: '0.06em',
+                  color: 'var(--charcoal)'
+                }}
+              >
+                Community Meetings Album
+              </h2>
+              <p className="font-body text-sm text-gray-600 mt-3 max-w-[650px] mx-auto">
+                Visual updates from the community consultations, resident coordination workshops, and on-ground advisory meetings happening across Dharavi sectors.
+              </p>
+            </div>
+
+             {/* Grid of Polaroid Cards */}
+             <motion.div 
+               variants={galleryContainerVariants}
+               initial="hidden"
+               whileInView="visible"
+               viewport={{ once: true, margin: '-60px' }}
+               className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+             >
+               {GALLERY_ITEMS.map((item, i) => (
+                 <motion.div
+                   key={item.id}
+                   onClick={() => setActiveIndex(i)}
+                   variants={galleryItemVariants}
+                   whileHover={{ 
+                     y: -8, 
+                     rotate: i % 2 === 0 ? 1.5 : -1.5,
+                     scale: 1.01,
+                     transition: { duration: 0.25, ease: 'easeOut' } 
+                   }}
+                   className="bg-white p-3 pb-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col gap-3 group border border-gray-100"
+                 >
+                   <div className="relative w-full aspect-square bg-gray-50 rounded-lg overflow-hidden">
+                     <Image
+                       src={item.src}
+                       alt={`Community Consultation Photo ${item.id}`}
+                       fill
+                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                       className="object-cover transition-transform duration-500 group-hover:scale-105"
+                     />
+                   </div>
+                   <div className="text-center mt-2">
+                     <span 
+                       className="font-ui text-xs text-gray-500 uppercase tracking-widest italic"
+                     >
+                       Session Image {item.id}
+                     </span>
+                   </div>
+                 </motion.div>
+               ))}
+             </motion.div>
+          </div>
         </div>
       </section>
+
+      {/* Lightbox Modal with Slider Navigation */}
+      <AnimatePresence>
+        {activeIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveIndex(null)}
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md cursor-zoom-out"
+          >
+            {/* Close button */}
+            <button 
+              onClick={() => setActiveIndex(null)}
+              className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors focus:outline-none p-2 bg-white/10 hover:bg-white/20 rounded-full z-[10000]"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Left navigation arrow */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveIndex((prev) => (prev === 0 ? GALLERY_ITEMS.length - 1 : prev - 1));
+              }}
+              className="absolute left-6 text-white/70 hover:text-white transition-colors focus:outline-none p-3 bg-white/10 hover:bg-white/20 rounded-full z-[10000] cursor-pointer"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Right navigation arrow */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveIndex((prev) => (prev === GALLERY_ITEMS.length - 1 ? 0 : prev + 1));
+              }}
+              className="absolute right-6 text-white/70 hover:text-white transition-colors focus:outline-none p-3 bg-white/10 hover:bg-white/20 rounded-full z-[10000] cursor-pointer"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Modal Content Frame */}
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-3xl aspect-[4/3] bg-white p-3 pb-12 rounded-2xl shadow-2xl flex flex-col cursor-default"
+            >
+              {/* Image box */}
+              <div className="relative w-full flex-grow rounded-lg overflow-hidden bg-gray-50">
+                <Image
+                  src={GALLERY_ITEMS[activeIndex].src}
+                  alt={`Community Consultation Photo ${activeIndex + 1}`}
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                />
+              </div>
+
+              {/* Caption */}
+              <div className="text-center mt-4">
+                <span className="font-heading font-semibold text-sm md:text-base text-gray-800 uppercase tracking-widest">
+                  Community Meeting Consultation — Image {activeIndex + 1} of {GALLERY_ITEMS.length}
+                </span>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Footer (Reused AboutSection) */}
       <AboutSection />

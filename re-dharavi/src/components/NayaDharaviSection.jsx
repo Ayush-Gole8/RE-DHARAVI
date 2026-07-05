@@ -1,42 +1,67 @@
 'use client';
 
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const PILLARS = [
   {
     number: '01',
     title: 'Housing Information',
-    body: 'Latest updates on housing options, registration processes, and eligibility for Dharavi residents.',
+    points: [
+      { label: 'Eligibility', text: 'Free homes for eligible ground floor residents residing before Jan 1, 2000.' },
+      { label: 'Rehousing 2000-2011', text: 'Residents between 2000 and 2011 are eligible for 300 sq. ft. homes inside or outside Dharavi for a nominal payment of Rs. 2.5 Lac.' },
+      { label: 'Home Layout', text: 'Safe, modern homes featuring 350 sq. ft. carpet area for the first time in slum rehabilitation history (50 sq. ft. larger than standard rehab norms).' }
+    ]
   },
   {
     number: '02',
-    title: 'Infrastructure Updates',
-    body: 'News on roads, sanitation, water supply, and civic improvements happening across Dharavi.',
+    title: 'Essential Amenities',
+    points: [
+      { label: 'Society Infrastructure', text: 'Elevators and medical stretcher lifts in all high-rise buildings, advanced fire-fighting systems, and secure cabins.' },
+      { label: 'Utility & Access', text: 'Piped gas infrastructure, internal roads, paved footpaths, street lighting, and well-lit common areas.' },
+      { label: 'Surroundings & Recreation', text: 'Seamlessly connected neighborhoods with walkable streets, open space networks, central parks, landscape gardens, playgrounds, and adequate parking spaces.' }
+    ]
   },
   {
     number: '03',
     title: 'Local Business Support',
-    body: 'Resources and information to help Dharavi\'s small businesses and entrepreneurs grow and thrive.',
+    points: [
+      { label: 'Cottage Industries', text: "Protection and integration of Dharavi's vibrant local shops, cottage industries, and local markets." },
+      { label: 'Commercial Space', text: 'Well-planned commercial offices and industrial spaces to sustain the estimated $650M annual economic output.' },
+      { label: 'Livelihood Security', text: 'Dedicated support to help small businesses and local entrepreneurs relocate and grow in rehabilitation phases.' }
+    ]
   },
   {
     number: '04',
-    title: 'Transparent Updates',
-    body: 'Honest, clear, and timely information delivered directly to the Dharavi community.',
+    title: 'Project Updates',
+    points: [
+      { label: 'Core Mission', text: 'Redevelopment aims to provide safe homes, clean water, proper drainage, and long-term security.' },
+      { label: 'Phased Rehabilitation', text: 'Rehabilitation will happen in phases within Dharavi (specifically pin codes 400017 and 400019) to minimize displacement.' },
+      { label: 'Culture Preservation', text: 'Core commitment to protect the rich community fabric, local culture, and livelihoods during construction.' }
+    ]
   },
   {
     number: '05',
     title: 'Community Events',
-    body: 'Announcements, gatherings, and important events happening across Dharavi.',
+    points: [
+      { label: 'Social Hubs', text: "Access to dedicated community spaces, open gardens, children's play areas, and playgrounds." },
+      { label: 'Coordination Forums', text: 'Structured coordination portals, consultation forums, and public hearings for master infrastructure plans.' },
+      { label: 'Cultural Workshops', text: 'Shared spaces for resident coordination, cultural programs, and local workshops.' }
+    ]
   },
   {
     number: '06',
     title: 'Youth Opportunities',
-    body: 'Skills, training, and employment opportunities for the youth of Dharavi.',
-  },
+    points: [
+      { label: 'Educational Facilities', text: 'Modern local schools with safe playgrounds and state-of-the-art learning environments.' },
+      { label: 'Skill Training', text: "Specialized skill-building programs and vocational training centers to prepare Dharavi's youth for jobs in the formal economy." },
+      { label: 'Local Employment', text: 'Prioritized job opportunities for young residents within the redevelopment project and commercial sectors.' }
+    ]
+  }
 ];
 
 export default function NayaDharaviSection() {
+  const [openIndex, setOpenIndex] = useState(null);
   const headerRef = useRef(null);
   const pillarsRef = useRef(null);
   const missionRef = useRef(null);
@@ -160,68 +185,196 @@ export default function NayaDharaviSection() {
             </h3>
           </motion.div>
 
-          {/* 2-column grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            {PILLARS.map((pillar, i) => (
-              <motion.div
-                key={pillar.number}
-                className="flex flex-col"
-                style={{
-                  padding: 'clamp(24px, 3vw, 40px) 0',
-                  paddingRight: i % 2 === 0 ? 'clamp(24px, 4vw, 60px)' : '0',
-                  paddingLeft: i % 2 === 1 ? 'clamp(24px, 4vw, 60px)' : '0',
-                  borderTop: '1px solid var(--border-table)',
-                  borderLeft: i % 2 === 1 ? '1px solid var(--border-table)' : 'none',
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={pillarsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 + i * 0.07 }}
-              >
-                {/* Number accent */}
-                <span
-                  className="font-display block mb-3"
-                  style={{
-                    fontSize: '36px',
-                    lineHeight: 1,
-                    color: 'var(--brand-magenta)',
-                    opacity: 0.4,
-                  }}
-                >
-                  {pillar.number}
-                </span>
+          {/* Desktop Tabbed Layout (visible on md and above) */}
+          <div className="hidden md:flex flex-row gap-12 mt-12 items-stretch min-h-[450px]">
+            {/* Left Column (40%): Tab Buttons */}
+            <div className="w-[40%] flex flex-col justify-between border-r border-gray-100 pr-8">
+              <div className="flex flex-col gap-2">
+                {PILLARS.map((pillar, i) => {
+                  const isActive = (openIndex === null && i === 0) || openIndex === i;
+                  return (
+                    <button
+                      key={pillar.number}
+                      onClick={() => setOpenIndex(i)}
+                      className="w-full text-left py-4 px-6 rounded-xl flex items-center gap-6 transition-all duration-300 focus:outline-none"
+                      style={{
+                        backgroundColor: isActive ? 'var(--cream)' : 'transparent',
+                        boxShadow: isActive ? '0 4px 15px rgba(0,0,0,0.02)' : 'none',
+                        borderLeft: isActive ? '4px solid var(--brand-rose)' : '4px solid transparent',
+                      }}
+                    >
+                      <span
+                        className="font-display text-2xl transition-colors duration-300"
+                        style={{
+                          color: isActive ? 'var(--brand-rose)' : 'var(--charcoal)',
+                          opacity: isActive ? 1 : 0.4,
+                        }}
+                      >
+                        {pillar.number}
+                      </span>
+                      <span
+                        className="font-heading font-bold uppercase text-sm sm:text-base transition-colors duration-300"
+                        style={{
+                          color: isActive ? 'var(--brand-rose)' : 'var(--charcoal)',
+                          letterSpacing: '0.08em',
+                        }}
+                      >
+                        {pillar.title}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-                {/* Title */}
-                <h4
-                  className="font-heading font-bold uppercase m-0 mb-3"
-                  style={{
-                    fontSize: 'clamp(16px, 1.8vw, 22px)',
-                    letterSpacing: '0.07em',
-                    color: 'var(--charcoal)',
-                    lineHeight: 1.2,
-                  }}
-                >
-                  {pillar.title}
-                </h4>
+            {/* Right Column (60%): Detailed Content Area */}
+            <div className="w-[60%] pl-8 flex flex-col justify-center">
+              <div className="bg-white border border-gray-100 rounded-3xl p-8 md:p-10 shadow-sm min-h-[380px] flex flex-col justify-center relative overflow-hidden">
+                {/* Visual Accent */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-magenta/5 to-transparent rounded-bl-full pointer-events-none" />
+                
+                {/* Active Content rendering */}
+                {PILLARS.map((pillar, i) => {
+                  const isActive = (openIndex === null && i === 0) || openIndex === i;
+                  if (!isActive) return null;
+                  return (
+                    <motion.div
+                      key={pillar.number}
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                      className="flex flex-col gap-6"
+                    >
+                      {/* Active Pillar Header */}
+                      <div className="flex items-center gap-4">
+                        <span className="font-display text-4xl text-brand-magenta/30">{pillar.number}</span>
+                        <h4 className="font-heading font-bold uppercase text-xl md:text-2xl text-black m-0 tracking-wide">
+                          {pillar.title}
+                        </h4>
+                      </div>
 
-                {/* Body */}
-                <p
-                  className="font-body m-0"
-                  style={{
-                    fontSize: '15px',
-                    lineHeight: 1.75,
-                    color: 'var(--charcoal)',
-                    opacity: 0.7,
-                  }}
-                >
-                  {pillar.body}
-                </p>
-              </motion.div>
-            ))}
+                      {/* Divider */}
+                      <div className="w-16 h-0.5 bg-brand-rose" />
+
+                      {/* Points list */}
+                      <div className="flex flex-col gap-5">
+                        {pillar.points.map((pt, pIdx) => (
+                          <div key={pIdx} className="flex flex-col gap-1">
+                            <span
+                              className="font-ui uppercase text-xs font-semibold tracking-wider"
+                              style={{ color: 'var(--nbt-gold)' }}
+                            >
+                              {pt.label}
+                            </span>
+                            <p className="font-body text-sm md:text-base text-gray-700 m-0 leading-relaxed">
+                              {pt.text}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-          {/* Bottom border */}
-          <div
-            style={{ borderTop: '1px solid var(--border-table)', marginTop: '0' }}
-          />
+
+          {/* Mobile Accordion Stack (hidden on md and above) */}
+          <div className="md:hidden flex flex-col mt-6 w-full">
+            {PILLARS.map((pillar, i) => {
+              const isOpen = openIndex === i;
+              return (
+                <div
+                  key={pillar.number}
+                  className="w-full border-t last:border-b transition-all duration-300"
+                  style={{ borderColor: 'var(--border-table)' }}
+                >
+                  {/* Accordion Header */}
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    className="w-full py-5 flex items-center justify-between text-left focus:outline-none group transition-colors duration-200 hover:bg-black/[0.01] px-2 rounded-lg my-1"
+                    aria-expanded={isOpen}
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Number Accent */}
+                      <span
+                        className="font-display text-xl transition-colors duration-300"
+                        style={{
+                          color: isOpen ? 'var(--brand-rose)' : 'var(--brand-magenta)',
+                          opacity: isOpen ? 1 : 0.4,
+                        }}
+                      >
+                        {pillar.number}
+                      </span>
+                      {/* Title */}
+                      <span
+                        className="font-heading font-bold uppercase text-sm transition-colors duration-300"
+                        style={{
+                          color: isOpen ? 'var(--brand-rose)' : 'var(--charcoal)',
+                          letterSpacing: '0.08em',
+                        }}
+                      >
+                        {pillar.title}
+                      </span>
+                    </div>
+                    {/* Toggle Icon */}
+                    <div
+                      className="text-charcoal transition-transform duration-300 flex-shrink-0"
+                      style={{
+                        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        color: isOpen ? 'var(--brand-rose)' : 'var(--charcoal)',
+                      }}
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+
+                  {/* Accordion Body */}
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={
+                      isOpen
+                        ? { height: 'auto', opacity: 1, marginBottom: 16 }
+                        : { height: 0, opacity: 0, marginBottom: 0 }
+                    }
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <div className="pl-8 pr-2 flex flex-col gap-4">
+                      {pillar.points.map((pt, pIdx) => (
+                        <div key={pIdx} className="flex flex-col gap-0.5">
+                          <span
+                            className="font-ui uppercase text-[10px] font-semibold"
+                            style={{ color: 'var(--nbt-gold)', letterSpacing: '0.05em' }}
+                          >
+                            {pt.label}
+                          </span>
+                          <p
+                            className="font-body text-xs m-0 text-gray-700"
+                            style={{ lineHeight: 1.5 }}
+                          >
+                            {pt.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
