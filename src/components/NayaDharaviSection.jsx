@@ -102,22 +102,13 @@ export default function NayaDharaviSection() {
               animate={headerInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.15 }}
             >
-              <h2
-                className="font-display leading-none m-0 text-black"
-                style={{ fontSize: 'clamp(64px, 10vw, 140px)', letterSpacing: '0.03em' }}
-              >
-                NAYA
-              </h2>
-              <h2
-                className="font-display leading-none m-0"
-                style={{
-                  fontSize: 'clamp(64px, 10vw, 140px)',
-                  letterSpacing: '0.03em',
-                  color: 'var(--nbt-gold)',
-                }}
-              >
-                DHARAVI
-              </h2>
+                <h2
+                  className="font-display leading-none m-0 flex flex-wrap md:flex-col gap-x-3"
+                  style={{ fontSize: 'clamp(52px, 12vw, 160px)', letterSpacing: '0.03em' }}
+                >
+                  <span className="text-black">NAYA</span>
+                  <span style={{ color: 'var(--nbt-gold)' }}>DHARAVI</span>
+                </h2>
             </motion.div>
 
             {/* Right: Body copy */}
@@ -204,10 +195,10 @@ export default function NayaDharaviSection() {
                       }}
                     >
                       <span
-                        className="font-display text-2xl transition-colors duration-300"
+                        className="font-heading font-bold text-base md:text-lg transition-colors duration-300"
                         style={{
-                          color: isActive ? 'var(--brand-rose)' : 'var(--charcoal)',
-                          opacity: isActive ? 1 : 0.4,
+                          color: isActive ? 'var(--brand-rose)' : 'var(--brand-magenta)',
+                          opacity: isActive ? 1 : 0.75,
                         }}
                       >
                         {pillar.number}
@@ -247,7 +238,12 @@ export default function NayaDharaviSection() {
                     >
                       {/* Active Pillar Header */}
                       <div className="flex items-center gap-4">
-                        <span className="font-display text-4xl text-brand-magenta/30">{pillar.number}</span>
+                        <span
+                          className="font-heading font-bold text-3xl"
+                          style={{ color: 'var(--brand-magenta)', opacity: 0.35 }}
+                        >
+                          {pillar.number}
+                        </span>
                         <h4 className="font-heading font-bold uppercase text-xl md:text-2xl text-black m-0 tracking-wide">
                           {pillar.title}
                         </h4>
@@ -298,10 +294,10 @@ export default function NayaDharaviSection() {
                     <div className="flex items-center gap-4">
                       {/* Number Accent */}
                       <span
-                        className="font-display text-xl transition-colors duration-300"
+                        className="font-heading font-bold text-base transition-colors duration-300"
                         style={{
                           color: isOpen ? 'var(--brand-rose)' : 'var(--brand-magenta)',
-                          opacity: isOpen ? 1 : 0.4,
+                          opacity: isOpen ? 1 : 0.75,
                         }}
                       >
                         {pillar.number}
