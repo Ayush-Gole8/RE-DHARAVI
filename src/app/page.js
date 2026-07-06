@@ -119,73 +119,68 @@ export default function Home() {
                 02
               </span>
               <div
-                className="max-w-editorial mx-auto pt-[80px] md:pt-[100px]"
+                className="max-w-editorial mx-auto pt-[40px] md:pt-[100px]"
                 style={{
                   paddingLeft: 'clamp(24px, 5vw, 80px)',
                   paddingRight: 'clamp(24px, 5vw, 80px)',
                 }}
               >
-                {/* Heading & Logo Row - Full Width */}
-                <div className="flex items-center gap-6 mb-8 flex-wrap md:flex-nowrap">
-                  <h3
-                    className="font-heading font-bold uppercase m-0 leading-none"
-                    style={{
-                      fontSize: 'clamp(24px, 3vw, 36px)',
-                      letterSpacing: '0.06em',
-                      color: 'var(--charcoal)',
-                    }}
-                  >
-                    Navbharat Mega Developers
-                  </h3>
-                  <div className="relative w-[180px] h-[45px] flex-shrink-0 bg-transparent flex items-center justify-center overflow-hidden">
+                {/* Logo Row - Full Width */}
+                <div className="flex items-center gap-6 mb-8">
+                  <div className="relative w-[180px] h-[50px] flex-shrink-0 bg-transparent flex items-center justify-center overflow-hidden">
                     <Image
                       src="/images/nblogo.jpeg"
                       alt="Navbharat Logo"
                       width={160}
-                      height={45}
+                      height={50}
                       className="object-contain mix-blend-multiply"
                     />
                   </div>
-                </div>
-
-                <div className="flex flex-col md:flex-row gap-8 items-start">
-                  {/* Left Column (45%): Building Image */}
-                  <div className="w-full md:w-[45%] flex flex-col gap-4">
-                    <div
-                      className="relative overflow-hidden w-full flex items-center justify-center rounded-2xl bg-white border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-md"
-                      style={{ minHeight: '260px', height: '260px' }}
-                    >
-                      <Image
-                        src="/images/developer-building.png"
-                        alt="Navbharat Modern Building Rendering"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 45vw"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Right Column (55%): Label & Body */}
-                  <div className="w-full md:w-[55%] flex flex-col gap-6 pt-0 md:pt-4">
-                    <span className="label-tag block" style={{ color: 'var(--nbt-gold)', fontWeight: 600 }}>
-                      REDEVELOPMENT PARTNER
-                    </span>
-                    <p
-                      className="font-body m-0"
-                      style={{
-                        fontSize: 'clamp(16px, 1.5vw, 20px)',
-                        lineHeight: 1.7,
-                        color: 'var(--charcoal)',
-                        maxWidth: '540px',
-                      }}
-                    >
-                      Navbharat Mega Developers aims to transform and revitalise Dharavi into a world-class township while preserving its vibrant community, rich culture, and entrepreneurial spirit.
-                    </p>
-                    <div 
-                      style={{ height: '2px', backgroundColor: 'var(--nbt-gold)', width: '60px' }}
+                  <div className="w-px h-10 bg-gray-200 flex-shrink-0" />
+                  <div className="relative h-[55px] w-[140px] flex-shrink-0 bg-transparent flex items-center justify-center">
+                    <Image
+                      src="/images/sraa.jpeg"
+                      alt="SRA Logo"
+                      width={180}
+                      height={90}
+                      className="object-contain mix-blend-multiply"
+                      style={{ width: '100%', height: '100%' }}
                     />
                   </div>
                 </div>
+
+
+                <div className="flex flex-col gap-6">
+                  <p
+                    className="font-body m-0"
+                    style={{
+                      fontSize: 'clamp(16px, 1.5vw, 20px)',
+                      lineHeight: 1.7,
+                      color: 'var(--charcoal)',
+                      maxWidth: '720px',
+                    }}
+                  >
+                    Navbharat Mega Developers Private Limited is a Special Purpose Vehicle (SPV) between the Government of Maharashtra through the Dharavi Redevelopment Project (DRP) / Slum Rehabilitation Authority (SRA) and the Adani Group.
+                  </p>
+                  <span className="label-tag block" style={{ color: 'var(--nbt-gold)', fontWeight: 600 }}>
+                    REDEVELOPMENT PARTNER
+                  </span>
+                  <p
+                    className="font-body m-0"
+                    style={{
+                      fontSize: 'clamp(16px, 1.5vw, 20px)',
+                      lineHeight: 1.7,
+                      color: 'var(--charcoal)',
+                      maxWidth: '720px',
+                    }}
+                  >
+                    Navbharat Mega Developers aims to transform and revitalise Dharavi into a world-class township while preserving its vibrant community, rich culture, and entrepreneurial spirit.
+                  </p>
+                  <div
+                    style={{ height: '2px', backgroundColor: 'var(--nbt-gold)', width: '60px' }}
+                  />
+                </div>
+
               </div>
             </div>
           </motion.div>
