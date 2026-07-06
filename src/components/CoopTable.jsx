@@ -4,11 +4,13 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const TABLE_DATA = [
-  { type: 'Cooperative Societies', count: '85+', activity: 'Shared resource management' },
-  { type: 'Nagars (sub-districts)', count: '14', activity: 'Residential governance' },
-  { type: 'Chawls', count: '200+', activity: 'Shared housing units' },
-  { type: 'Registered Industries', count: '5,000+', activity: 'Manufacturing & export' },
-  { type: 'Recycling Units', count: '800+', activity: 'Waste processing' },
+  //{ type: 'Cooperative Societies', count: '85+', activity: 'Shared resource management' },
+  { type: '350 sq.ft. Homes', count: '11,000+', activity: 'Rehabilitated tenements for eligible residents' },
+  { type: 'Open Green Spaces', count: 'City-scale', activity: 'Parks, gardens & public recreational zones' },
+  { type: 'Modern Hospital', count: 'Multi-speciality', activity: 'Accessible healthcare for all residents' },
+  { type: 'School & Education', count: 'Sector-wide', activity: 'Quality schooling & skill development centres' },
+  //{ type: 'Registered Industries', count: '5,000+', activity: 'Waste, manufacturing & export' },
+  { type: 'Industrial Area', count: 'Dedicated zone', activity: 'Preserved livelihoods & commercial hubs' },
 ];
 
 export default function CoopTable({ compact = false }) {
@@ -22,7 +24,7 @@ export default function CoopTable({ compact = false }) {
       style={{ backgroundColor: 'var(--off-white)' }}
     >
       <div
-        className={`max-w-editorial mx-auto ${compact ? 'pt-[80px] md:pt-[100px]' : ''}`}
+        className={`max-w-editorial mx-auto ${compact ? 'pt-[30px] md:pt-[100px]' : ''}`}
         style={{ paddingLeft: 'clamp(24px, 5vw, 80px)', paddingRight: 'clamp(24px, 5vw, 80px)' }}
       >
         <div className={`flex flex-col md:flex-row ${compact ? 'gap-6 md:gap-8' : 'gap-12 md:gap-16'}`}>
@@ -33,7 +35,7 @@ export default function CoopTable({ compact = false }) {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className={`label-tag block ${compact ? 'mb-2' : 'mb-4'}`}>COMMUNITY STRUCTURES</span>
+            <span className={`label-tag block ${compact ? 'mb-2' : 'mb-4'}`}>COMMUNITY & INFRASTRUCTURE</span>
             <h2
               className="font-heading font-bold uppercase m-0 leading-tight"
               style={{
@@ -52,9 +54,7 @@ export default function CoopTable({ compact = false }) {
                 color: 'var(--charcoal)',
               }}
             >
-              Dharavi&apos;s informal economy is structured through a dense network of
-              cooperative societies, nagars, and chawls - each functioning as a
-              micro-neighbourhood with its own governance.
+              Dharavi&apos;s informal economy is structured through cooperative societies and registered industries, which are preserved and integrated with modern housing, green spaces, healthcare, and schooling in the redevelopment plan.
             </p>
           </motion.div>
 
@@ -75,28 +75,20 @@ export default function CoopTable({ compact = false }) {
                 <thead>
                   <tr style={{ background: 'var(--gradient-brand)' }}>
                     <th
-                      className="text-left font-ui font-semibold text-white uppercase text-[10px] sm:text-xs p-2 sm:p-3 md:p-4 w-[32%] sm:w-[35%]"
+                      className="text-left font-ui font-semibold text-white uppercase text-[10px] sm:text-xs p-2 sm:p-3 md:p-4 w-[40%] sm:w-[35%]"
                       style={{
                         letterSpacing: '0.08em',
                       }}
                     >
-                      Type
+                      Feature
                     </th>
                     <th
-                      className="text-left font-ui font-semibold text-white uppercase text-[10px] sm:text-xs p-2 sm:p-3 md:p-4 w-[18%] sm:w-[15%]"
+                      className="text-left font-ui font-semibold text-white uppercase text-[10px] sm:text-xs p-2 sm:p-3 md:p-4 w-[60%] sm:w-[65%]"
                       style={{
                         letterSpacing: '0.08em',
                       }}
                     >
-                      Count
-                    </th>
-                    <th
-                      className="text-left font-ui font-semibold text-white uppercase text-[10px] sm:text-xs p-2 sm:p-3 md:p-4 w-[50%] sm:w-[50%]"
-                      style={{
-                        letterSpacing: '0.08em',
-                      }}
-                    >
-                      Primary Activity
+                      Purpose
                     </th>
                   </tr>
                 </thead>
@@ -126,14 +118,6 @@ export default function CoopTable({ compact = false }) {
                         }}
                       >
                         {row.type}
-                      </td>
-                      <td
-                        className="font-ui text-xs sm:text-sm p-2 sm:p-3 md:p-4"
-                        style={{
-                          color: 'var(--charcoal)',
-                        }}
-                      >
-                        {row.count}
                       </td>
                       <td
                         className="font-ui text-xs sm:text-sm p-2 sm:p-3 md:p-4 break-words"
