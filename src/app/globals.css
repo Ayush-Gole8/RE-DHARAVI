@@ -123,6 +123,10 @@
   }
 
   /* ── Responsive Sticky & Horizontal Scroll Layouts ───────── */
+  .section-divider-container {
+    min-height: 500px;
+  }
+
   .responsive-sticky-section {
     position: sticky;
     top: 0;
@@ -164,6 +168,10 @@
       height: auto !important;
       min-height: auto !important;
       overflow: visible !important;
+    }
+
+    .section-divider-container {
+      min-height: 380px !important;
     }
 
     .responsive-editorial-sticky {
