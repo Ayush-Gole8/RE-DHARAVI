@@ -86,7 +86,7 @@ export default function DiversityCulture() {
               lineHeight: 1.75
             }}
           >
-            Dharavi is not uniform; it is divided into six distinct sectors, each harboring unique religious congregations, regional dialects, and specialized trades.
+            Dharavi is not uniform; it is divided into six distinct sectors, each harboring unique cultural congregations, regional dialects, and specialized trades.
           </p>
         </div>
 
