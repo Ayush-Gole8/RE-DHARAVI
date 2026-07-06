@@ -20,8 +20,8 @@ export default function SectionDivider({ partNumber, title, description, imageSr
   return (
     <section
       ref={ref}
-      className="relative w-full overflow-hidden"
-      style={{ height: fullHeight ? '100%' : '80vh', minHeight: '500px' }}
+      className="relative w-full overflow-hidden section-divider-container"
+      style={{ height: fullHeight ? '100%' : '80vh' }}
     >
       {/* Brand gradient background */}
       <div
@@ -56,7 +56,7 @@ export default function SectionDivider({ partNumber, title, description, imageSr
 
       {/* Text content */}
       <div
-        className="relative z-10 flex flex-col justify-center h-full w-full md:max-w-[60%] pt-[80px] md:pt-[100px]"
+        className="relative z-10 flex flex-col justify-center h-full w-full md:max-w-[60%] pt-16 md:pt-[100px] pb-12 md:pb-0"
         style={{ paddingLeft: 'clamp(24px, 5vw, 80px)', paddingRight: 'clamp(24px, 5vw, 80px)' }}
       >
         {/* Part label */}
