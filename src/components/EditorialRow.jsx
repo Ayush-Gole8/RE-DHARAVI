@@ -85,7 +85,7 @@ export default function EditorialRow({
               {/* Image Container */}
               <div
                 ref={imageRef}
-                className="relative overflow-hidden w-full"
+                className="relative overflow-hidden w-full rounded-2xl"
                 style={{ minHeight: '260px', height: '260px' }}
               >
                 <Image
@@ -237,7 +237,7 @@ export default function EditorialRow({
   const imageContent = (
     <div
       ref={imageRef}
-      className="relative overflow-hidden w-full"
+      className="relative overflow-hidden w-full rounded-2xl"
       style={{ minHeight: compact ? '320px' : '500px' }}
     >
       <motion.div
