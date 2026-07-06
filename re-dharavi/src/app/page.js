@@ -179,7 +179,7 @@ export default function Home() {
                         maxWidth: '540px',
                       }}
                     >
-                      Navbharat Mega Developers aims to transform and revitalise Dharavi into a world-class township while preserving its vibrant community, rich culture, and entrepreneurial spirit.
+                      Navbharat Mega Developers aims to transform and revitalise Dharavi into a world-class township while preserving its vibrant community, rich culture and entrepreneurial spirit.
                     </p>
                     <div 
                       style={{ height: '2px', backgroundColor: 'var(--nbt-gold)', width: '60px' }}

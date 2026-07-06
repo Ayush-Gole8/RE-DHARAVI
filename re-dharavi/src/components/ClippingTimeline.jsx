@@ -70,7 +70,7 @@ export default function ClippingTimeline() {
           </h2>
           <div className="mt-4" style={{ height: '2px', backgroundColor: 'var(--nbt-gold)', width: '80px' }} />
           <p className="font-body mt-6 text-gray-600 max-w-[600px] text-sm leading-relaxed">
-            A vertical scroll-driven chronicle. Stacking key news reports, articles, and announcements outlining the milestones of Dharavi’s ongoing redevelopment.
+          Stacked key news reports, articles and announcements outlining the milestones of Dharavi’s ongoing redevelopment.
           </p>
         </div>
 
