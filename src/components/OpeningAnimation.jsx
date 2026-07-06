@@ -101,7 +101,7 @@ export default function OpeningAnimation({ onComplete }) {
 
             {/* Percentage indicator */}
             <div className="flex justify-between w-full font-heading text-white" style={{ fontSize: '12px', letterSpacing: '0.1em' }}>
-              <span style={{ color: 'rgba(255, 255, 255, 0.4)' }}>LOADING CONTENT</span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.4)' }}>EMPOWERING DHARAVIKARS...</span>
               <span className="font-bold">{Math.round(progress)}%</span>
             </div>
           </div>
