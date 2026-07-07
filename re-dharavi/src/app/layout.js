@@ -1,5 +1,7 @@
 import './globals.css';
 import { Poppins, Six_Caps, Khand, Martel_Sans } from 'next/font/google';
+import Script from 'next/script';
+import LanguageTranslator from '@/components/LanguageTranslator';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -47,7 +49,30 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${poppins.variable} ${sixCaps.variable} ${khand.variable} ${martelSans.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <LanguageTranslator />
+        
+        {/* Google Translate Callback Init */}
+        <Script id="google-translate-init" strategy="afterInteractive">
+          {`
+            window.googleTranslateElementInit = function() {
+              new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi,mr',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+              }, 'google_translate_element');
+            }
+          `}
+        </Script>
+        
+        {/* Google Translate Script */}
+        <Script
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
+      </body>
     </html>
   );
 }

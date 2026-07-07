@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, useMemo, useRef, useEffect } from 'react';
+import { forwardRef, useMemo, useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './VariableProximity.css';
 
@@ -59,6 +59,34 @@ const VariableProximity = forwardRef((props, ref) => {
     style,
     ...restProps
   } = props;
+
+  const [isTranslated, setIsTranslated] = useState(false);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    const checkLang = () => {
+      const langAttr = document.documentElement.getAttribute('lang');
+      const cookieMatch = document.cookie.match(/googtrans=\/en\/([^;]+)/);
+      const activeLang = (cookieMatch && cookieMatch[1]) || langAttr || 'en';
+      setIsTranslated(activeLang !== 'en');
+    };
+
+    checkLang();
+
+    const observer = new MutationObserver(checkLang);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['lang'],
+    });
+
+    const interval = setInterval(checkLang, 1000);
+
+    return () => {
+      observer.disconnect();
+      clearInterval(interval);
+    };
+  }, []);
 
   const letterRefs = useRef([]);
   const interpolatedSettingsRef = useRef([]);
@@ -142,6 +170,20 @@ const VariableProximity = forwardRef((props, ref) => {
       letterRef.style.fontVariationSettings = newSettings;
     });
   });
+
+  if (isTranslated) {
+    return (
+      <span
+        ref={ref}
+        className={`${className} variable-proximity`}
+        onClick={onClick}
+        style={{ display: 'inline', ...style }}
+        {...restProps}
+      >
+        {label}
+      </span>
+    );
+  }
 
   const words = label.split(' ');
   let letterIndex = 0;
